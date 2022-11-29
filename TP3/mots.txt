@@ -1,10 +1,2 @@
-honte
-table
-crayon
-essaim
-souris
-abeille
-clavier
-sobriete
-indignite
-telephone
+honteh
+tablet

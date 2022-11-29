@@ -22,8 +22,8 @@ def FindWord(Fichier):
 
 def RempStrJeu(Letter,mot,strAcompleter):
     '''
-    Regarde si la lettre est dans lle mot.
-    Retourne la str du jeu en cours et un booléen qui vaut True si la lettre etait dans le mot.
+    Regarde si la lettre est dans le mot.
+    Retourne la str du jeu en cours.
     Letter est une str de 1 de long.
     mot est une str.
     strAcompleter est une str.
@@ -44,7 +44,7 @@ def AffiMotATrouver(motcache):
     toPrint = ""
     for i in motcache:
         toPrint += i + " "
-    print(toPrint)
+    return toPrint
 
 
 def CallInput():
