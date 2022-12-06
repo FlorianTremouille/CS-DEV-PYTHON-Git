@@ -1,11 +1,13 @@
 from .Player import CPlayer
 from .Projectile import CProjectile #ici uniquement pour les tests, il sera uniquement importé dans Cprojevctile et CEnnemi
+from .Ennemi import CEnnemi
 
 class World:
     PLAYER_COORD_X = 350
     PLAYER_COORD_Y = 648
     PLAYER_WIDTH = 50
     PLAYER_HEIGHT = 50
+
 
 
     def __init__(self, canvas): 
@@ -18,9 +20,13 @@ class World:
             self.PLAYER_WIDTH,
             self.PLAYER_HEIGHT,
             )
-        W_Player.player_Init(canvas) 
         self.W_Player = W_Player
+        W_Player.init_player(canvas)
 
+        W_Ennemis = CEnnemi()
+        self.W_Ennemis = W_Ennemis
+        W_Ennemis.init_ennemis(canvas)
+        
         W_Projectile = CProjectile(
             50,
             50,

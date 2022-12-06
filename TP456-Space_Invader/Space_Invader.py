@@ -12,16 +12,18 @@ canvas.pack(side= "left", padx= 5, pady= 5)
 
 map = World(canvas)
 PLAYER = map.W_Player.Can_Player
-canvas.pack()
-Ennemi = canvas.create_rectangle(0, 0, 50, 50, fill='red')
+
+dENNEMI = map.W_Ennemis
+# Ennemi = canvas.create_rectangle(0, 0, 50, 50, fill='red')
 
 def EnnemiMove(way):
     x = 50
-    Coords = canvas.coords(Ennemi)
+    CoordsLast = canvas.coords(dENNEMI.values()[-1])
+    CoordsFirst = canvas.coords(dENNEMI.values()[0])
     
-    if Coords[2] > 750 and way == 1 :
+    if CoordsLast[2] > 750 and way == 1 :
         way = -1
-    elif Coords[0] < 50 and way == -1 :
+    elif CoordsFirst[0] < 50 and way == -1 :
         way = 1
 
     if way == 1:
