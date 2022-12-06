@@ -11,7 +11,7 @@ canvas.pack(side= "left", padx= 5, pady= 5)
 # Vaisseau = Canvas.create_rectangle(0, 648, 50, 698, fill='blue')
 
 map = World(canvas)
-PLAYER = map.p.player
+PLAYER = map.W_Player.Can_Player
 canvas.pack()
 Ennemi = canvas.create_rectangle(0, 0, 50, 50, fill='red')
 

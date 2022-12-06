@@ -1,4 +1,4 @@
-class Player:
+class CPlayer:
     
     def __init__(self,x,y,w,h):
         self.x=x
@@ -7,12 +7,12 @@ class Player:
         self.h=h
 
     def player_Init(self,canvas):
-        self.player = canvas.create_rectangle(
+        self.Can_Player = canvas.create_rectangle(
             self.x,
             self.y,
             self.x + self.w,
             self.y + self.h,
             fill='blue'
             )
-        return self.player
+        return self.Can_Player
     

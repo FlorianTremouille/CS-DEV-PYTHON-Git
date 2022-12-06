@@ -1,4 +1,4 @@
-from .Player import Player
+from .Player import CPlayer
 
 class World:
     PLAYER_COORD_X = 350
@@ -11,11 +11,11 @@ class World:
         self.init_World(canvas)
 
     def init_World(self, canvas):
-        p = Player(
+        W_Player = CPlayer(
             self.PLAYER_COORD_X,
             self.PLAYER_COORD_Y,
             self.PLAYER_WIDTH,
             self.PLAYER_HEIGHT,
             )
-        p.player_Init(canvas) 
-        self.p = p
+        W_Player.player_Init(canvas) 
+        self.W_Player = W_Player
