@@ -6,13 +6,13 @@ class CPlayer:
         self.w=w
         self.h=h
 
-    def player_Init(self,canvas):
-        self.Can_Player = canvas.create_rectangle(
+    def init_player(self,canvas):
+        Can_Player = canvas.create_rectangle(
             self.x,
             self.y,
             self.x + self.w,
             self.y + self.h,
             fill='blue'
             )
+        self.Can_Player = Can_Player
         return self.Can_Player
-    
