@@ -32,7 +32,7 @@ def EnnemiMove(way):
         Window.after(500,lambda: EnnemiMove(way))
 
 
-def left(event):
+def left(e):
    x = -20
    y = 0
    canvas.move(PLAYER, x, y)
@@ -42,11 +42,23 @@ def right(e):
    y = 0
    canvas.move(PLAYER, x, y)
 
+def ProjMove(proj):
+    y = -20
+    canvas.move(proj,0,y)
+    Window.after(200,lambda : ProjMove(proj))
+
+def Tir(e) :
+    PlayerProj = map.W_Player.PlayerProj_Init(canvas)
+    ProjMove(PlayerProj)
+
+
 # Bind the move function
 Window.bind("<Left>", left)
 Window.bind("<Right>", right)
+Window.bind("<space>", Tir)
 
 # Initialisation
 Window.after(100,lambda: EnnemiMove(1))
+Window.after(100,ProjMove)
 
 Window.mainloop()

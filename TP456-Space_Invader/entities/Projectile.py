@@ -1,4 +1,4 @@
-class Projectile :
+class CProjectile :
 
     def __init__(self,x,y,w,h):
         self.x=x
@@ -12,7 +12,7 @@ class Projectile :
             self.y,
             self.x + self.w,
             self.y + self.h,
-            fill = 'red'           
+            fill = 'green'           
         )
         return self.projectile
 
