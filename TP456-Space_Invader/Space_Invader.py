@@ -16,7 +16,7 @@ canvas.pack()
 Ennemi = canvas.create_rectangle(0, 0, 50, 50, fill='red')
 
 def EnnemiMove(way):
-    x = 100
+    x = 50
     Coords = canvas.coords(Ennemi)
     
     if Coords[2] > 750 and way == 1 :
@@ -26,13 +26,13 @@ def EnnemiMove(way):
 
     if way == 1:
         canvas.move(Ennemi,x,0)
-        Window.after(2000,EnnemiMove(way))
+        Window.after(500,lambda: EnnemiMove(way))
     elif way == -1:
         canvas.move(Ennemi,-x,0)
-        Window.after(2000,EnnemiMove(way))
+        Window.after(500,lambda: EnnemiMove(way))
 
 
-def left(e):
+def left(event):
    x = -20
    y = 0
    canvas.move(PLAYER, x, y)
@@ -47,7 +47,6 @@ Window.bind("<Left>", left)
 Window.bind("<Right>", right)
 
 # Initialisation
-# Window.after(1000,EnnemiMove(1))
-
+Window.after(100,lambda: EnnemiMove(1))
 
 Window.mainloop()
