@@ -71,6 +71,7 @@ def CollisionBloc():
 
 
 def CollisionTir():
+    collision = False
     tirs = map.W_Player.gettir()
     for k in tirs :
         for i in ENNEMI_TAG_LST :
@@ -79,6 +80,11 @@ def CollisionTir():
                     canvas.delete(k)
                     map.W_Player.deletir()                       
                     canvas.delete(i)
+                    collision = True
+                    colisee = i
+    if collision == True :
+        ENNEMI_TAG_LST.remove(colisee)
+
     Window.after(10,CollisionTir)
 
                     
