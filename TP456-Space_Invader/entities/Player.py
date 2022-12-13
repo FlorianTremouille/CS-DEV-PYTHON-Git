@@ -48,7 +48,7 @@ class CPlayer:
 
     def PlayerProj_Init(self,canvas,x,y):
         CPlayerProj = CProjectile(
-        x, # pas bon il faut récupérer e,n live
+        x, # pas bon il faut récupérer en live
         y,
         5,
         30,

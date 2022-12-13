@@ -39,6 +39,7 @@ class CEnnemi:
         CoordsLast = canvas.coords(self.__Can_Tag_Ennemis[-1])
         CoordsFirst = canvas.coords(self.__Can_Tag_Ennemis[0])
 
+
         if CoordsLast[2] > 750 and way == 1 :
             way = -1
         elif CoordsFirst[0] < 50 and way == -1 :

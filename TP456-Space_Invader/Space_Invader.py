@@ -1,3 +1,12 @@
+"""
+TO DO :
+OVERLAPPING
+MULTIPLE ENNEMI RAW
+LINE 51-56 : INDEX ERROR
+"""
+
+
+
 import tkinter as Tk
 from entities.World import World
 
@@ -79,9 +88,9 @@ def CollisionTir():
                     canvas.delete(k)
                     map.W_Player.deletir()                       
                     canvas.delete(i)
-    Window.after(10,CollisionTir)
+    Window.after(1,CollisionTir)
 
-                    
+
 
 # Bind the move function
 Window.bind("<Left>", left)
