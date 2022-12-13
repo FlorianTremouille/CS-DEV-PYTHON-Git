@@ -7,6 +7,7 @@ class CPlayer:
         self.__y=y
         self.__w=w
         self.__h=h
+        self.__tir = []
 
     def init_player(self,canvas):
         Can_Player = canvas.create_rectangle(
@@ -18,6 +19,15 @@ class CPlayer:
             )
         self.__Can_Player = Can_Player
         return self.__Can_Player
+
+    def deletir(self) :
+        self.__tir = self.__tir[0:-1]
+
+    def gettir(self):
+        return self.__tir
+    
+    def settir(self,tir):
+        self.__tir.append(tir)
 
     def getw(self):
         return self.__w
