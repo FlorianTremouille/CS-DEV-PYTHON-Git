@@ -34,20 +34,22 @@ def EnnemiMove(way):
             canvas.move(ennemi,x,y)
         elif way == -1:
             canvas.move(ennemi,-x,y)
-    Window.after(42,lambda: EnnemiMove(way))
+    CollisionBloc()
+    CollisionTir()
+    Window.after(30,lambda: EnnemiMove(way))
 
 
 def left(e):
    x = -20
    y = 0
    canvas.move(PLAYER_CANVAS, x, y)
-   map.W_Player.set(canvas.coords(PLAYER_CANVAS)[2],canvas.coords(PLAYER_CANVAS)[1])
+   map.W_Player.set(canvas.coords(PLAYER_CANVAS)[0],canvas.coords(PLAYER_CANVAS)[1])
 
 def right(e):
    x = 20
    y = 0
    canvas.move(PLAYER_CANVAS, x, y)
-   map.W_Player.set(canvas.coords(PLAYER_CANVAS)[2],canvas.coords(PLAYER_CANVAS)[1])
+   map.W_Player.set(canvas.coords(PLAYER_CANVAS)[0],canvas.coords(PLAYER_CANVAS)[1])
 
 
 def ProjMove(proj):  # fonction qui fait bouger les projectiles
@@ -56,14 +58,34 @@ def ProjMove(proj):  # fonction qui fait bouger les projectiles
     canvas.move(proj,0,y)
     if canvas.coords(proj)[1] == 0 :
         canvas.delete(proj)
+        map.W_Player.deletir()
         return
+  
     Window.after(5,lambda : ProjMove(proj))
 
 def Tir(e) :
-    x = map.W_Player.getx() - (map.W_Player.getw())/2
+    x = map.W_Player.getx() + (map.W_Player.getw())/2
     y = map.W_Player.gety()
     PlayerProj = map.W_Player.PlayerProj_Init(canvas,x,y)
+    map.W_Player.settir(PlayerProj)
     ProjMove(PlayerProj)
+
+def CollisionBloc():
+    y = map.W_Player.gety()
+    if canvas.coords(ENNEMI_TAG_LST[0])[3] > y -40 : 
+        return# fonction perdu
+
+
+def CollisionTir():
+    tirs = map.W_Player.gettir()
+    for k in tirs :
+        for i in ENNEMI_TAG_LST :
+            if canvas.coords(k)[1] < canvas.coords(i)[3] and canvas.coords(k)[1] > canvas.coords(i)[1]:
+                if canvas.coords(k)[0] < canvas.coords(i)[2] and canvas.coords(k)[0] > canvas.coords(i)[0]:
+                    canvas.delete(k)
+                    map.W_Player.deletir()                       
+                    canvas.delete(i)
+                    
 
 
 # Bind the move function
