@@ -72,7 +72,7 @@ Window.bind("<Right>", right)
 Window.bind("<space>", Tir)
 
 # Initialisation
-EnnemiMove(1)
+
 Window.after(100,lambda: EnnemiMove(1))
 Window.after(100,ProjMove)
 
