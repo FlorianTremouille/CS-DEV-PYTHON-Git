@@ -1,4 +1,8 @@
 import time
+
+VITESSE_ENNEMI_X = 5
+VITESSE_ENNEMI_Y = 50
+
 class CEnnemi:
 
     DIST_BETWEEN = 20
@@ -7,14 +11,16 @@ class CEnnemi:
     ENNEMI_WIDTH = 50
     ENNEMI_HEIGHT = 50
 
-    def __init__(self):
+    def __init__(self,canvas):
+        self.__Can_Tag_Ennemis = []
+        
         pass
     def init_ennemis(self,canvas):
         X_Ennemi = self.ENNEMI_COORD_X_START
         Y_Ennemi =self.ENNEMI_COORD_Y_START
-        Can_Tag_Ennemis = []
+
         for x in range(0, 5):
-            Can_Tag_Ennemis.append("Ennemi_{0}".format(x))
+            self.__Can_Tag_Ennemis.append("Ennemi_{0}".format(x))
             canvas.create_rectangle(X_Ennemi,
                                     Y_Ennemi,
                                     X_Ennemi +self.ENNEMI_WIDTH,
@@ -22,26 +28,27 @@ class CEnnemi:
                                     tags = "Ennemi_{0}".format(x),
                                     fill= 'red')
             X_Ennemi += self.ENNEMI_WIDTH + self.DIST_BETWEEN
-        self.__Can_Tag_Ennemis = Can_Tag_Ennemis
+        self.EnnemiMove(-1,canvas)
     
     def get(self):
         return self.__Can_Tag_Ennemis
 
-    # def EnnemiMove(self,canvas,way):
-    #     x = 5
-    #     CoordsLast = canvas.coords(self.__Can_Tag_Ennemis[-1])
-    #     CoordsFirst = canvas.coords(self.__Can_Tag_Ennemis[0])
-    #     if CoordsLast[2] > 750 and way == 1 :
-    #         way = -1
-    #     elif CoordsFirst[0] < 50 and way == -1 :
-    #         way = 1
+    def EnnemiMove(self,way,canvas):
+        x = VITESSE_ENNEMI_X
+        y = 0
+        CoordsLast = canvas.coords(self.__Can_Tag_Ennemis[-1])
+        CoordsFirst = canvas.coords(self.__Can_Tag_Ennemis[0])
 
-    #     for ennemi in self.__Can_Tag_Ennemis:
-    #         if way == 1:
-    #             canvas.move(ennemi,x,0)
-    #         elif way == -1:
-    #             canvas.move(ennemi,-x,0)
-    #     time.sleep(0.1)
-    #     self.EnnemiMove(canvas,way)
-    # # Window.after(42,lambda: EnnemiMove(canvas,way))
+        if CoordsLast[2] > 750 and way == 1 :
+            way = -1
+        elif CoordsFirst[0] < 50 and way == -1 :
+            y = VITESSE_ENNEMI_Y
+            way = 1
+        
+        for ennemi in self.__Can_Tag_Ennemis:
+            if way == 1:
+                canvas.move(ennemi,x,y)
+            elif way == -1:
+                canvas.move(ennemi,-x,y)
+        canvas.after(40,lambda: self.EnnemiMove(way,canvas))
     

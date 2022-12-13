@@ -8,8 +8,16 @@ Window = Tk.Tk()
 Window.title('Space INVADATEUR')
 Window.geometry('1000x800')
 
+score=Tk.Label(Window,text='Score: 0')
+score.pack(anchor="nw", side="left", padx= 5, pady= 5)
+
+NbVies=Tk.Label(Window,text="Vies: 3")
+NbVies.pack(anchor= "ne", side="right", padx= 5, pady= 5)
+
 canvas = Tk.Canvas(Window, width='800', height='700', bg = 'gray')
-canvas.pack(side= "left", padx= 5, pady= 5)
+canvas.pack(side= "bottom", padx= 5, pady= 5)
+
+
 
 # Vaisseau = Canvas.create_rectangle(0, 648, 50, 698, fill='blue')
 
@@ -20,24 +28,6 @@ ENNEMIS_OBJECT = map.W_Ennemis
 
 # Ennemi = canvas.create_rectangle(0, 0, 50, 50, fill='red')
 
-def EnnemiMove(way):
-    x = VITESSE_ENNEMI_X
-    y = 0
-    CoordsLast = canvas.coords(ENNEMI_TAG_LST[-1])
-    CoordsFirst = canvas.coords(ENNEMI_TAG_LST[0])
-
-    if CoordsLast[2] > 750 and way == 1 :
-        way = -1
-    elif CoordsFirst[0] < 50 and way == -1 :
-        y = VITESSE_ENNEMI_Y
-        way = 1
-    
-    for ennemi in ENNEMI_TAG_LST:
-        if way == 1:
-            canvas.move(ennemi,x,y)
-        elif way == -1:
-            canvas.move(ennemi,-x,y)
-    Window.after(40,lambda: EnnemiMove(way))
 
 
 def left(e):

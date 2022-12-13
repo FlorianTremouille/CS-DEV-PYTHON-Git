@@ -376,7 +376,6 @@ BoutonJouer=tk.Button(mw,text='Jouer',command=NouvellePartie)
 BoutonJouer.grid(row=0,column=1)
 
 
-
 BoutonQuitter=tk.Button(mw,text='Quitter',command=mw.destroy)
 BoutonQuitter.grid(row=0,column=2)
 

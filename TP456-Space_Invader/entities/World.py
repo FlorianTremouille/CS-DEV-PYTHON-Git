@@ -15,15 +15,14 @@ class World:
 
     def init_World(self, canvas):
         W_Player = CPlayer(
-            self.PLAYER_COORD_X,
-            self.PLAYER_COORD_Y,
-            self.PLAYER_WIDTH,
-            self.PLAYER_HEIGHT,
-            )
+                            self.PLAYER_COORD_X,
+                            self.PLAYER_COORD_Y,
+                            self.PLAYER_WIDTH,
+                            self.PLAYER_HEIGHT)
         self.W_Player = W_Player
         W_Player.init_player(canvas)
 
-        W_Ennemis = CEnnemi()
+        W_Ennemis = CEnnemi(canvas)
         self.W_Ennemis = W_Ennemis
         W_Ennemis.init_ennemis(canvas)
         
