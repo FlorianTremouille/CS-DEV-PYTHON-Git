@@ -11,7 +11,7 @@ canvas.pack(side= "left", padx= 5, pady= 5)
 # Vaisseau = Canvas.create_rectangle(0, 648, 50, 698, fill='blue')
 
 map = World(canvas)
-PLAYER = map.W_Player.Can_Player
+PLAYER = map.W_Player.getCP()
 
 dENNEMI = map.W_Ennemis
 # Ennemi = canvas.create_rectangle(0, 0, 50, 50, fill='red')
@@ -38,19 +38,28 @@ def left(e):
    x = -20
    y = 0
    canvas.move(PLAYER, x, y)
+   map.W_Player.set(canvas.coords(PLAYER)[2],canvas.coords(PLAYER)[1])
 
 def right(e):
    x = 20
    y = 0
    canvas.move(PLAYER, x, y)
+   map.W_Player.set(canvas.coords(PLAYER)[2],canvas.coords(PLAYER)[1])
 
-def ProjMove(proj):
-    y = -20
+
+def ProjMove(proj):  # fonction qui fait bouger les projectiles
+    # proj est un canvas.rectangle
+    y = -1
     canvas.move(proj,0,y)
-    Window.after(200,lambda : ProjMove(proj))
+    if canvas.coords(proj)[1] == 0 :
+        canvas.delete(proj)
+        return
+    Window.after(5,lambda : ProjMove(proj))
 
 def Tir(e) :
-    PlayerProj = map.W_Player.PlayerProj_Init(canvas)
+    x = map.W_Player.getx() - (map.W_Player.getw())/2
+    y = map.W_Player.gety()
+    PlayerProj = map.W_Player.PlayerProj_Init(canvas,x,y)
     ProjMove(PlayerProj)
 
 

@@ -1,19 +1,25 @@
 class CProjectile :
 
     def __init__(self,x,y,w,h):
-        self.x=x
-        self.y=y
-        self.w=w
-        self.h=h
+        self.__x=x
+        self.__y=y
+        self.__w=w
+        self.__h=h
+
+    def getx(self):
+        return self.__x
+
+    def gety(self):
+        return self.__y
 
     def projectile_Init(self,canvas):
-        self.projectile = canvas.create_rectangle(
-            self.x,
-            self.y,
-            self.x + self.w,
-            self.y + self.h,
+        self.__projectile = canvas.create_rectangle(
+            self.__x,
+            self.__y,
+            self.__x + self.__w,
+            self.__y + self.__h,
             fill = 'green'           
         )
-        return self.projectile
+        return self.__projectile
 
     
