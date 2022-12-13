@@ -141,3 +141,4 @@ Window.after(100,lambda: EnnemiMove(1))
 Window.after(100,ProjMove)
 
 Window.mainloop()
+chgt
