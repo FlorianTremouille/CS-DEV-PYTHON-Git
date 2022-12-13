@@ -1,8 +1,8 @@
 import tkinter as Tk
 from entities.World import World
 
-VITESSE_ENNEMI_X = 5
-VITESSE_ENNEMI_Y = 50
+
+
 
 Window = Tk.Tk()
 Window.title('Space INVADATEUR')
@@ -67,6 +67,8 @@ def CollisionBloc():
     y = map.W_Player.gety()
     if canvas.coords(ENNEMI_TAG_LST[0])[3] > y -40 : 
         return# fonction perdu
+    Window.after(10,CollisionBloc)
+
 
 
 def CollisionTir():
@@ -78,6 +80,8 @@ def CollisionTir():
                     canvas.delete(k)
                     map.W_Player.deletir()                       
                     canvas.delete(i)
+    Window.after(10,CollisionTir)
+
                     
 
 # Bind the move function
@@ -88,5 +92,7 @@ Window.bind("<space>", Tir)
 
 # Initialisation
 Window.after(100,ProjMove)
+Window.after(10,CollisionTir)
+Window.after(10,CollisionBloc)
 
 Window.mainloop()
