@@ -3,10 +3,9 @@ from entities.World import World
 
 
 
-
 Window = Tk.Tk()
 Window.title('Space INVADATEUR')
-Window.geometry('1000x800')
+Window.geometry('1000x1000')
 
 score=Tk.Label(Window,text='Score: 0')
 score.pack(anchor="nw", side="left", padx= 5, pady= 5)
