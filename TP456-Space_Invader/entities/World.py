@@ -1,4 +1,5 @@
 from .Player import CPlayer
+from .Projectile import CProjectile #ici uniquement pour les tests, il sera uniquement importé dans Cprojevctile et CEnnemi
 from .Ennemi import CEnnemi
 
 class World:
@@ -25,3 +26,12 @@ class World:
         W_Ennemis = CEnnemi()
         self.W_Ennemis = W_Ennemis
         W_Ennemis.init_ennemis(canvas)
+        
+        W_Projectile = CProjectile(
+            50,
+            50,
+            5,
+            30,
+        )
+        W_Projectile.projectile_Init(canvas) 
+        self.W_Projectile = W_Projectile
