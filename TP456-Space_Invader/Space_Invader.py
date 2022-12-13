@@ -27,10 +27,10 @@ def EnnemiMove(way):
         way = 1
 
     if way == 1:
-        canvas.move(Ennemi,x,0)
+        canvas.move(dENNEMI,x,0)
         Window.after(500,lambda: EnnemiMove(way))
     elif way == -1:
-        canvas.move(Ennemi,-x,0)
+        canvas.move(dENNEMI,-x,0)
         Window.after(500,lambda: EnnemiMove(way))
 
 
