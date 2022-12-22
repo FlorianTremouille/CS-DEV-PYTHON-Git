@@ -5,7 +5,9 @@ from .Bullet import Bullet
 
 class Player:
 
+    bullet_speed = 3
     bullet_fired = 0
+
 
     def __init__(self, canvas: Canvas, x: int = 350, y: int = 650, width: int = 50, height: int = 50, color: str = 'blue'):
         self.__canvas = canvas
@@ -65,4 +67,4 @@ class Player:
         actual_player_coords = self.__canvas.coords('player')
         x = actual_player_coords[0] + (self.__width / 2)
         y = actual_player_coords[1]
-        Bullet(self.__canvas, bullet_tag, x, y, 1).fire(3)    
+        Bullet(self.__canvas, bullet_tag, x, y).fire(self.bullet_speed)    

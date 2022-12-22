@@ -14,25 +14,24 @@ class Bullet:
 
     def get_canvas(self):
         return self.__canvas
-    
+
     def get_tag(self):
         return self.__tag
-    
+
     def get_x(self):
         return self.__x
-    
+
     def get_y(self):
         return self.__y
 
     def get_width(self):
         return self.__width
-    
+
     def get_height(self): 
         return self.__height   
 
     def get_color(self):        
         return self.__color
-        
 
     def get_interval_id(self):
         return self.__interval_id
@@ -44,10 +43,10 @@ class Bullet:
             self.__x + self.__width,
             self.__y + self.__height,
             tags = self.__tag,
-            fill = self.__color           
+            fill = self.__color
         )
 
     def fire(self, speed: float):
-       self.__canvas.move(self.__tag, 0, -3 * speed)
-       self.__interval_id = self.__canvas.after(30, lambda: self.fire(speed))
+        self.__canvas.move(self.__tag, 0, -3 * speed)
+        self.__interval_id = self.__canvas.after(30, lambda: self.fire(speed))
         
