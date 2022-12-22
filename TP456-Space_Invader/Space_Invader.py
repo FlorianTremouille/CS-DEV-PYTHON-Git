@@ -1,8 +1,11 @@
 """
+Si erreur : "ModuleNotFoundError: No module named 'pynput'"
+Relancer l'installeur Python et s'assurer d'avoir coché "Add python to enironment variables"
+Faire dans la console :
+    python -m ensurepip
+    pip install pynput
+    
 TO DO :
-OVERLAPPING
-MULTIPLE ENNEMI RAW
-LINE 51-56 : INDEX ERROR
 """
 
 import tkinter as Tk
