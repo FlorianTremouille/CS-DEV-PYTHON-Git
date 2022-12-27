@@ -63,13 +63,16 @@ class Game:
         self.__First_Tag_of_summoned_enemy = self.__Last_Tag_of_summoned_enemy +1
         self.__Last_Tag_of_summoned_enemy += self.__Enemy_per_wave
 
-        self.start_enemies_pattern()
+        self.start_enemies_pattern(self.__Enemy_per_wave)
 
         
-    def start_enemies_pattern(self, way: int = -1):
-        x = 5
+    def start_enemies_pattern(self, enemy_number: int, way: int = -1, x: float = 5):
         y = 0
         enemies = self.__canvas.find_withtag('enemy')
+
+        new_enemy_number = len(enemies)
+        x += ((enemy_number - new_enemy_number) / enemy_number)*x
+
         if len(enemies) > 0 :
 
             last_enemy_of_row_c = self.__canvas.coords(enemies[-1])
@@ -86,4 +89,5 @@ class Game:
                     self.__canvas.move(enemy, x, y)
                 elif way == -1:
                     self.__canvas.move(enemy, -x, y)
-            self.__canvas.after(40, lambda: self.start_enemies_pattern(way))     
+            
+            self.__canvas.after(40, lambda: self.start_enemies_pattern(new_enemy_number, way, x))     
