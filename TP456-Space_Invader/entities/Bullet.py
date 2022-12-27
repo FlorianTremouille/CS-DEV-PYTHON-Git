@@ -1,3 +1,8 @@
+"""
+Class s'occupant des tirs.
+
+"""
+
 from tkinter import Canvas;
 
 class Bullet:
@@ -48,5 +53,10 @@ class Bullet:
 
     def fire(self, speed: float):
         self.__canvas.move(self.__tag, 0, -3 * speed)
+        self.check_fire_out_of_range()
         self.__interval_id = self.__canvas.after(30, lambda: self.fire(speed))
-        
+
+    def check_fire_out_of_range(self):
+        c = self.__canvas.coords(self.__tag)
+        if len(c)>1 and c[1] < 0 :
+            self.__canvas.delete(self.__tag)

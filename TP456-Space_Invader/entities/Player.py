@@ -1,5 +1,9 @@
+"""
+Class s'occupant du joueur.
+"""
 from tkinter import Canvas
 from pynput.keyboard import Key, Listener
+from time import time
 
 from .Bullet import Bullet
 
@@ -7,6 +11,8 @@ class Player:
 
     bullet_speed = 3
     bullet_fired = 0
+    fire_cooldown = 0   #Temps en secondes
+    last_fire_time = 0
 
 
     def __init__(self, canvas: Canvas, x: int = 350, y: int = 650, width: int = 50, height: int = 50, color: str = 'blue'):
@@ -47,7 +53,10 @@ class Player:
         if (key == Key.right):
             self.move_right()
         if (key == Key.space):
-            self.fire_bullet()
+            Actual_Time = time()
+            if Actual_Time - self.last_fire_time >= self.fire_cooldown:
+                self.last_fire_time = Actual_Time
+                self.fire_bullet()
 
     def move_left(self):
         if self.__canvas.coords('player')[0] > 25:
@@ -62,9 +71,9 @@ class Player:
             self.__canvas.move('player', x, y) 
 
     def fire_bullet(self):
-        bullet_tag = 'bullet_{0}'.format(self.bullet_fired)
+        bullet_tag = 'p_bullet_{0}'.format(self.bullet_fired)
         self.bullet_fired += 1
         actual_player_coords = self.__canvas.coords('player')
         x = actual_player_coords[0] + (self.__width / 2)
         y = actual_player_coords[1]
-        Bullet(self.__canvas, bullet_tag, x, y).fire(self.bullet_speed)    
+        Bullet(self.__canvas, bullet_tag, x, y).fire(self.bullet_speed)
