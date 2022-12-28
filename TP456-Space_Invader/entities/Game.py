@@ -71,7 +71,7 @@ class Game:
         enemies = self.__canvas.find_withtag('enemy')
 
         new_enemy_number = len(enemies)
-        x += ((enemy_number - new_enemy_number) / enemy_number)*x
+        x += ((enemy_number - new_enemy_number) / enemy_number) * x * 0.5
 
         if len(enemies) > 0 :
 
