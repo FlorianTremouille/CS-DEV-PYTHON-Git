@@ -6,44 +6,119 @@ Faire dans la console :
     pip install pynput
     
 TO DO :
-"""
 
+Implémentaton file : Ordonner l'apparition des ennemies par type dans une file puis ensuite les "summon"
+"""
+import os
 import tkinter as Tk
-from time import sleep
 
 from entities.Game import Game
 
+working_dir = os.path.dirname(__file__)
+os.chdir(working_dir)
 
-def Restart(canvas):
-    canvas.delete('all')
-    # canvas = Tk.Canvas(Window, width='800', height='700', bg = 'gray')
-    # canvas.pack(anchor=Tk.CENTER, side="top")
-    Jeu = Game(canvas)
+frame_menu : Tk.Frame
+frame_game : Tk.Frame
+about : Tk.Tk
+bg_game_img : Tk.PhotoImage
 
-def LeaveGame():
-    Window.destroy()
+def start_menu():
+
+    global frame_menu, bg_frames_img
+    frame_menu = Tk.Frame(window, bg= "red")
+
+    bg_menu = Tk.Label(frame_menu,image= bg_frames_img)
+    bg_menu.place(x = 0, y = 0)
+
+    about_btn = Tk.Button(frame_menu,text="A propos", command=display_about)
+    about_btn.pack()
+
+    game_title = Tk.Label(frame_menu, text="SPACE INVADER")
+
+    game_title.pack(padx= 100, pady= (100,0))
+
+    play_btn = Tk.Button(frame_menu, text="Jouer",command=start_game)
+    play_btn.pack(anchor=Tk.S, side="left", padx= 5, pady= (50,5))
+
+    quit_btn=Tk.Button(frame_menu,text="Quitter",command=leave_game)
+    quit_btn.pack(anchor=Tk.S, side="right", padx= 5, pady= (50,5))
+
+    frame_menu.pack(fill=Tk.BOTH)
+
+def display_about():
+    global about
+
+    try:
+        about
+        about.destroy()
+    except:
+        pass
+
+    about = Tk.Tk()
+    about.title('A propos')
+
+    project_title = Tk.Label(about, text="PROJET CS DEV PYTHON")
+    author_title = Tk.Label(about, text="Hugo MIAGLIA et Florian TRÉMOUILLE")
+
+    project_title.pack(padx= 100)
+    author_title.pack(padx= 100)
+
+    about.mainloop()
+
+def start_game(): 
+    global frame_game, bg_game_img, bg_frames_img
+    frame_menu.destroy()
+    
+    frame_game = Tk.Frame(window)
+
+    frame_game_info = Tk.Frame(frame_game)
+
+    bg_menu = Tk.Label(frame_game_info,image= bg_frames_img)
+    bg_menu.place(x = 0, y = 0)
+
+    score=Tk.Label(frame_game_info, text="Score : 0")
+    score.pack(anchor=Tk.N, side="left", padx= 5, pady= 5)
+
+    NbVies=Tk.Label(frame_game_info, text="Vies : 3")
+    NbVies.pack(anchor= Tk.N, side="right", padx= 5, pady= 5)
+
+    frame_game_info.pack(fill=Tk.BOTH, side=Tk.TOP)
+
+    canvas = Tk.Canvas(frame_game, width='800', height='700')
+    canvas.create_image(400,350,image=bg_game_img)
+    canvas.pack(anchor=Tk.CENTER, side="top")
 
 
-Window = Tk.Tk()
-Window.title('Space INVADATEUR')
-Window.geometry('1200x800'  )
+    frame_game_actions = Tk.Frame(frame_game)
 
-score=Tk.Label(Window,text='Score : 0')
-score.pack(anchor=Tk.N, side="left", padx= 5, pady= 5) # 
+    bg_menu = Tk.Label(frame_game_actions,image= bg_frames_img)
+    bg_menu.place(x = 0, y = 0)
 
-NbVies=Tk.Label(Window,text="Vies : 3")
-NbVies.pack(anchor= Tk.N, side="right", padx= 5, pady= 5) # 
+    RestartBtn=Tk.Button(frame_game_actions, text="Recommencer une partie", command=restart)
+    RestartBtn.pack(anchor=Tk.S, side="left", padx= 5, pady= 5)
 
-QuitBtn=Tk.Button(Window,text="Quitter",command=LeaveGame)
-QuitBtn.pack(anchor=Tk.S, side="right", padx= 5, pady= 5)
+    quit_btn=Tk.Button(frame_game_actions,text="Quitter",command=leave_game)
+    quit_btn.pack(anchor=Tk.S, side="right", padx= 5, pady= 5)
 
-RestartBtn=Tk.Button(Window, text="Recommencer une partie", command=(lambda: Restart(canvas)))  #NE FONCTIONNE PAS
-RestartBtn.pack(anchor=Tk.S, side="left", padx= 5, pady= 5)
+    frame_game_actions.pack(fill=Tk.BOTH, side=Tk.BOTTOM)
 
-# GameImage=Tk.PhotoImage(file='fond.gif')
-canvas = Tk.Canvas(Window, width='800', height='700', bg = 'gray')
-# canvas.create_image(0,0,anchor='nw',image=GameImage)
-canvas.pack(anchor=Tk.CENTER, side="top", padx= 5, pady= 5)
+    frame_game.pack(padx=0,pady=0)
 
-Jeu = Game(canvas)
-Window.mainloop()
+    Game(canvas)
+
+def restart():
+    frame_game.destroy()
+    start_game()
+
+def leave_game():
+    window.destroy()
+
+
+window = Tk.Tk()
+window.title('Space INVADATEUR')
+
+bg_game_img= Tk.PhotoImage(file='game_bg.gif')
+bg_frames_img= Tk.PhotoImage(file='frame_bg.gif')
+
+start_menu()
+window.mainloop()
