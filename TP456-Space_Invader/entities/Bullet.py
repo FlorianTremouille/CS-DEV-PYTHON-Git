@@ -7,7 +7,7 @@ from tkinter import Canvas;
 
 class Bullet:
 
-    def __init__(self, canvas: Canvas, tag: str, x: float, y: float, width: int = 10, height: int = 30, color: str = 'green'):
+    def __init__(self, canvas: Canvas, tag: str, x: float, y: float, color: str = 'green', width: int = 10, height: int = 30):
         self.__canvas = canvas
         self.__tag = tag
         self.__x = x
@@ -42,7 +42,7 @@ class Bullet:
         return self.__interval_id
 
     def init_in_canvas(self):
-        self.__canvas.create_rectangle(
+        id = self.__canvas.create_rectangle(
             self.__x,
             self.__y,
             self.__x + self.__width,
@@ -50,13 +50,14 @@ class Bullet:
             tags = self.__tag,
             fill = self.__color
         )
+        self.__id = id
 
-    def fire(self, speed: float):
-        self.__canvas.move(self.__tag, 0, -3 * speed)
+    def fire(self, speed: float, way: int = -1):
+        self.__canvas.move(self.__id, 0, way * 3 * speed)
         self.check_fire_out_of_range()
-        self.__interval_id = self.__canvas.after(30, lambda: self.fire(speed))
+        self.__interval_id = self.__canvas.after(30, lambda: self.fire(speed, way))
 
     def check_fire_out_of_range(self):
-        c = self.__canvas.coords(self.__tag)
-        if len(c)>1 and c[1] < 0 :
-            self.__canvas.delete(self.__tag)
+        c = self.__canvas.coords(self.__id)
+        if len(c)>1 and (c[1] < 0 or c[3] > 700) :
+            self.__canvas.delete(self.__id)

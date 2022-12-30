@@ -9,9 +9,9 @@ from .Bullet import Bullet
 
 class Player:
 
+    # bullet_fired = 0
     bullet_speed = 3
-    bullet_fired = 0
-    fire_cooldown = 0.5   #Temps en secondes
+    fire_cooldown = 0.0   #Temps en secondes
     last_fire_time = 0
 
 
@@ -22,8 +22,13 @@ class Player:
         self.__width = width
         self.__height = height
         self.__color = color
+        self.is_alive = True
+        self.__remaining_lives = 1
+        self.__god_mod = False
 
         self.bind_inputs()
+
+
 
     def get_canvas(self):
         return self.__canvas
@@ -42,10 +47,29 @@ class Player:
 
     def get_color(self):
         return self.__color
+    
+    def set_id(self, id):
+        self.__id = id
+
+    def get_id(self):
+        return self.__id
+    
+    def set_check_for_collision_after_id(self, id):
+        self.__check_for_collision_after_id = id
+    
+    def get_check_for_collision_after_id(self):
+        return self.__check_for_collision_after_id
+
+    def get_is_alive(self):
+        return self.is_alive
+
+    def set_god_mod(self, value: bool):
+        self.__god_mod = value
+
 
     def bind_inputs(self):        
-        listener = Listener(on_press=self.on_press_handlers) 
-        listener.start()         
+        self.__listener = Listener(on_press=self.on_press_handlers) 
+        self.__listener.start() 
             
     def on_press_handlers(self, key):
         if (key == Key.left):
@@ -53,9 +77,9 @@ class Player:
         if (key == Key.right):
             self.move_right()
         if (key == Key.space):
-            Actual_Time = time()
-            if Actual_Time - self.last_fire_time >= self.fire_cooldown:
-                self.last_fire_time = Actual_Time
+            actual_time = time()
+            if actual_time - self.last_fire_time >= self.fire_cooldown:
+                self.last_fire_time = actual_time
                 self.fire_bullet()
 
     def move_left(self):
@@ -71,9 +95,42 @@ class Player:
             self.__canvas.move('player', x, y) 
 
     def fire_bullet(self):
-        bullet_tag = 'p_bullet_{0}'.format(self.bullet_fired)
-        self.bullet_fired += 1
-        actual_player_coords = self.__canvas.coords('player')
+        bullet_tag = 'p_bullet' 
+        actual_player_coords = self.__canvas.coords(self.__id)
         x = actual_player_coords[0] + (self.__width / 2)
         y = actual_player_coords[1]
         Bullet(self.__canvas, bullet_tag, x, y).fire(self.bullet_speed)
+
+    def check_for_collision(self):
+        c = self.get_canvas().coords(self.get_id())        
+        entitites = self.get_canvas().find_overlapping(c[0], c[1], c[2], c[3])        
+
+        for widget in entitites:
+            for tag in self.get_canvas().gettags(widget):
+                if 'e_bullet' == tag:
+                    self.life_loose()
+                    self.__canvas.delete(widget)
+                if 'enemy' == tag:
+                    self.player_dead()
+                else: 
+                    continue_check = True
+        if (continue_check and self.get_is_alive()):    
+            self.set_check_for_collision_after_id(self.get_canvas().after(30, lambda: self.check_for_collision()))
+
+    def life_loose(self):
+        if self.__god_mod == False:
+            print(self.__remaining_lives)
+            if self.__remaining_lives == 0 :
+                self.player_dead()
+            else:
+                self.__remaining_lives -= 1
+                self.set_god_mod(True)
+                self.__canvas.after(1*1000, lambda: self.set_god_mod(False))
+                print('-1 life')
+
+    def player_dead(self):
+        self.is_alive = False
+        self.__canvas.after_cancel(self.get_check_for_collision_after_id())
+
+    def __exit__(self):
+        self.__listener.join()

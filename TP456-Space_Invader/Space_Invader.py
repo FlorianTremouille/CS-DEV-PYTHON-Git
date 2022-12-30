@@ -4,7 +4,7 @@ Relancer l'installeur Python et s'assurer d'avoir coché "Add python to enironme
 Faire dans la console :
     python -m ensurepip
     pip install pynput
-    
+
 TO DO :
 
 Implémentaton file : Ordonner l'apparition des ennemies par type dans une file puis ensuite les "summon"
@@ -21,6 +21,7 @@ frame_menu : Tk.Frame
 frame_game : Tk.Frame
 about : Tk.Tk
 bg_game_img : Tk.PhotoImage
+game : Game
 
 def start_menu():
 
@@ -66,7 +67,7 @@ def display_about():
     about.mainloop()
 
 def start_game(): 
-    global frame_game, bg_game_img, bg_frames_img
+    global game, frame_game, bg_game_img, bg_frames_img
     frame_menu.destroy()
     
     frame_game = Tk.Frame(window)
@@ -88,7 +89,6 @@ def start_game():
     canvas.create_image(400,350,image=bg_game_img)
     canvas.pack(anchor=Tk.CENTER, side="top")
 
-
     frame_game_actions = Tk.Frame(frame_game)
 
     bg_menu = Tk.Label(frame_game_actions,image= bg_frames_img)
@@ -104,9 +104,11 @@ def start_game():
 
     frame_game.pack(padx=0,pady=0)
 
-    Game(canvas)
+    game = Game(canvas)
 
 def restart():
+    global game
+    del game
     frame_game.destroy()
     start_game()
 
