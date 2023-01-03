@@ -11,7 +11,7 @@ class Player:
 
     # bullet_fired = 0
     bullet_speed = 3
-    fire_cooldown = 0.0   #Temps en secondes
+    fire_cooldown = 0.2   #Temps en secondes
     last_fire_time = 0
 
 

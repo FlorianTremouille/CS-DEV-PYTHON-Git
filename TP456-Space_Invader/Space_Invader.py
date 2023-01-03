@@ -8,6 +8,8 @@ Faire dans la console :
 TO DO :
 
 Implémentaton file : Ordonner l'apparition des ennemies par type dans une file puis ensuite les "summon"
+Implémenation pile : 
+
 """
 import os
 import tkinter as Tk
