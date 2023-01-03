@@ -13,46 +13,53 @@ class Army:
     def __init__(self, canvas: Canvas, level):
         self.__canvas = canvas
         self.__level = level
-        self.__initial_wave_size = len(self.__level)
+        self.__initial_wave_size = self.initial_wave_size()
 
         # self.__initial_wave_size = 5
         self.is_army_alive = True
 
         self.init_enemies()
+    
+    def initial_wave_size(self):
+        wave_size = 0
+        for enemy_raw in self.__level:
+            wave_size += len(enemy_raw)
+        return wave_size
 
     def init_enemies(self):
         self.is_army_alive = True
-        x_start = 235
         y_start = 5
         space_between = 20
         tag = 'enemy'
 
-        # for _ in range (0, self.__initial_wave_size):
-        for enemy_type in self.__level:  
-            enemy = None         
-            if enemy_type == EnemyType.BasicEnemy.value:
-                enemy = BasicEnemy(self.__canvas)                
-            elif enemy_type == EnemyType.AdvancedEnemy.value:
-                enemy = AdvancedEnemy(self.__canvas)
-            
-            id = self.__canvas.create_rectangle(
-                x_start,
-                y_start,
-                x_start + enemy.get_width(),
-                y_start + enemy.get_height(),
-                tags = tag,
-                fill= enemy.get_color())
-            enemy.set_id(id)
-            enemy.check_for_collision()
+        for enemy_raw in self.__level:
+            x_start = 235
+            for enemy_type in enemy_raw:  
+                enemy = None         
+                if enemy_type == EnemyType.BasicEnemy.value:
+                    enemy = BasicEnemy(self.__canvas)                
+                elif enemy_type == EnemyType.AdvancedEnemy.value:
+                    enemy = AdvancedEnemy(self.__canvas)
+                
+                id = self.__canvas.create_rectangle(
+                    x_start,
+                    y_start,
+                    x_start + enemy.get_width(),
+                    y_start + enemy.get_height(),
+                    tags = tag,
+                    fill= enemy.get_color())
+                enemy.set_id(id)
+                enemy.check_for_collision()
 
-            x_start += enemy.get_width() + space_between
+                x_start += enemy.get_width() + space_between
+            y_start += enemy.get_height() + space_between
 
         self.start_enemies_pattern(self.__initial_wave_size)
 
         
     def start_enemies_pattern(self, last_enemy_count: int, way: int = -1, speed: float = 5):
         y = 0
-        enemies = self.__canvas.find_withtag('enemy')      
+        enemies = self.__canvas.find_withtag('enemy')
 
         if len(enemies) > 0 :
             new_enemy_count = len(enemies)
