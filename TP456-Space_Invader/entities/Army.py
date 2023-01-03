@@ -21,6 +21,7 @@ class Army:
         self.init_enemies()
 
     def init_enemies(self):
+        self.is_army_alive = True
         x_start = 235
         y_start = 5
         space_between = 20

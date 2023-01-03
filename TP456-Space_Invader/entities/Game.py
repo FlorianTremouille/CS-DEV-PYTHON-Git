@@ -9,7 +9,6 @@ from .Player import Player
 from .Level import Level
 
 
-
 class Game: 
 
     def __init__(self, canvas: Canvas): 
@@ -39,12 +38,14 @@ class Game:
         return player
 
     def init_level(self):
-        return Level(self.__canvas)
+        level = Level(self.__canvas)
+        return level
 
     def set_next_level(self):
         self.display_level_won()
         self.__canvas.delete('p_bullet')
         self.__current_level.increase_level()
+        self.is_level_finished()
 
     def display_level_won(self):
         text = 'Niveau ' + str(self.__current_level.level_number) + ' terminé !'

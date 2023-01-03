@@ -18,12 +18,14 @@ class Level:
         self.level_number = level_number
         self.load_level()       
 
-    def load_level(self, level_name: str = 'level_3.json'):
+    def load_level(self, level_name: str = 'level_1.json'):
+        self.is_level_finished = False
         with open('levels/'+level_name, ) as level_file: 
             level = json.load(level_file)
             self.init_army(level)
 
     def increase_level(self):
+        del self.__current_army
         self.level_number += 1
         level = 'level_'+ str(self.level_number) + '.json'
         self.load_level(level)
