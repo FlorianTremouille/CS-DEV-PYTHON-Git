@@ -15,7 +15,7 @@ class Player:
     last_fire_time = 0
 
 
-    def __init__(self, canvas: Canvas, x: int = 350, y: int = 650, width: int = 50, height: int = 50, color: str = 'blue'):
+    def __init__(self, canvas: Canvas, x: int = 400, y: int = 650, width: int = 50, height: int = 50, color: str = 'blue'):
         self.__canvas = canvas
         self.__x = x
         self.__y = y
@@ -83,13 +83,13 @@ class Player:
                 self.fire_bullet()
 
     def move_left(self):
-        if self.__canvas.coords('player')[0] > 25:
+        if self.__canvas.coords('player')[0]-25 > 25:
             x = -20
             y = 0            
             self.__canvas.move('player', x , y)
 
     def move_right(self):
-        if self.__canvas.coords('player')[2] < 775:
+        if self.__canvas.coords('player')[0]+25 < 775:
             x = 20
             y = 0
             self.__canvas.move('player', x, y) 
@@ -97,15 +97,18 @@ class Player:
     def fire_bullet(self):
         bullet_tag = 'p_bullet' 
         actual_player_coords = self.__canvas.coords(self.__id)
-        x = actual_player_coords[0] + (self.__width / 2)
+        x = actual_player_coords[0]
         y = actual_player_coords[1]
         Bullet(self.__canvas, bullet_tag, x, y).fire(self.bullet_speed)
 
     def check_for_collision(self):
-        c = self.get_canvas().coords(self.get_id())        
-        entitites = self.get_canvas().find_overlapping(c[0], c[1], c[2], c[3])        
+        c = self.get_canvas().coords(self.get_id())
+        w = self.__width
+        h = self.__height
+        entitites = self.get_canvas().find_overlapping(c[0] - w/2, c[1] - h/2, c[0] + w/2, c[1] + h/2)      
 
         for widget in entitites:
+            pass
             for tag in self.get_canvas().gettags(widget):
                 if 'e_bullet' == tag:
                     self.life_loose()
@@ -113,7 +116,7 @@ class Player:
                 if 'enemy' == tag:
                     self.player_dead()
                 else: 
-                    continue_check = True
+                        continue_check = True
         if (continue_check and self.get_is_alive()):    
             self.set_check_for_collision_after_id(self.get_canvas().after(30, lambda: self.check_for_collision()))
 

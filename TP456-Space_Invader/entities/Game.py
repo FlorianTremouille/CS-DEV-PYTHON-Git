@@ -2,7 +2,7 @@
 Class s'occupant de la partie en générale. Elle coordonne les autres classes.
 """
 
-from tkinter import Canvas
+from tkinter import Canvas, PhotoImage
 from time import sleep
 
 from .Player import Player
@@ -14,6 +14,7 @@ class Game:
     def __init__(self, canvas: Canvas): 
         self.__canvas = canvas
 
+        self.__img_player = PhotoImage(file='player_2.png')
         self.__player = self.init_player()
         self.is_player_alive()
         
@@ -25,13 +26,11 @@ class Game:
 
     def init_player(self):
         player = Player(self.__canvas)
-        id = self.__canvas.create_rectangle(
+        id = self.__canvas.create_image(
             player.get_x(),
             player.get_y(),
-            player.get_x() + player.get_width(),
-            player.get_y() + player.get_height(),
             tags = 'player',
-            fill = player.get_color()
+            image = self.__img_player
         )
         player.set_id(id)
         player.check_for_collision()
