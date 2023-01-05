@@ -107,6 +107,7 @@ def start_game():
     frame_game.pack(padx=0,pady=0)
 
     game = Game(canvas)
+    window.update()
 
 def restart():
     global game
@@ -123,6 +124,7 @@ window.title('Space INVADATEUR')
 
 bg_game_img= Tk.PhotoImage(file='game_bg.gif')
 bg_frames_img= Tk.PhotoImage(file='frame_bg.gif')
+
 
 start_menu()
 window.mainloop()

@@ -6,6 +6,7 @@ from tkinter import Canvas
 import json
 
 from .Army import Army
+from .Rock import Rock
 
 
 
@@ -16,7 +17,8 @@ class Level:
     def __init__(self, canvas : Canvas, level_number: int = 1):
         self.__canvas = canvas
         self.level_number = level_number
-        self.load_level()       
+        self.load_level()
+        self.init_rock()   
 
     def load_level(self, level_name: str = 'level_1.json'):
         self.is_level_finished = False
@@ -33,6 +35,9 @@ class Level:
     def init_army(self, level):
         self.__current_army = Army(self.__canvas, level)
         self.is_army_alive()
+
+    def init_rock(self):
+        self.__rocks = Rock(self.__canvas)
 
     def is_army_alive(self):
         if not self.__current_army.is_army_alive:
