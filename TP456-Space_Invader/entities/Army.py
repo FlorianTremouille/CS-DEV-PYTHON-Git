@@ -28,24 +28,38 @@ class Army:
 
     def init_enemies(self):
         self.is_army_alive = True
+        e=10
         y_start = 5
         space_between = 20
         tag = 'enemy'
 
         for enemy_raw in self.__level:
-            x_start = 235
+            x_start = 50
             for enemy_type in enemy_raw:  
-                enemy = None         
+                enemy = None
+                pts = [
+                    (x_start+2.5*e,y_start+5*e),
+                    (x_start+0.5*e,y_start+2*e),
+                    (x_start,y_start+1*e),
+                    (x_start+1*e,y_start),
+                    (x_start+2*e,y_start+1*e),
+                    (x_start+1.5*e,y_start+2*e),
+                    (x_start+2.5*e,y_start+3*e),
+                    (x_start+3.5*e,y_start+2*e),
+                    (x_start+3*e,y_start+1*e),
+                    (x_start+4*e,y_start),
+                    (x_start+5*e,y_start+1*e),
+                    (x_start+4.5*e,y_start+2*e),
+                    ]
                 if enemy_type == EnemyType.BasicEnemy.value:
                     enemy = BasicEnemy(self.__canvas)                
                 elif enemy_type == EnemyType.AdvancedEnemy.value:
                     enemy = AdvancedEnemy(self.__canvas)
                 
-                id = self.__canvas.create_rectangle(
-                    x_start,
-                    y_start,
-                    x_start + enemy.get_width(),
-                    y_start + enemy.get_height(),
+                id = self.__canvas.create_polygon(
+                    pts,
+                    smooth=1,
+                    splinesteps=12,
                     tags = tag,
                     fill= enemy.get_color())
                 enemy.set_id(id)
@@ -57,7 +71,7 @@ class Army:
         self.start_enemies_pattern(self.__initial_wave_size)
 
         
-    def start_enemies_pattern(self, last_enemy_count: int, way: int = -1, speed: float = 5):
+    def start_enemies_pattern(self, last_enemy_count: int, way: int = 1, speed: float = 5):
         y = 0
         enemies = self.__canvas.find_withtag('enemy')
 
@@ -68,9 +82,9 @@ class Army:
             last_enemy_of_row_c = self.__canvas.coords(enemies[-1])
             first_enemy_of_row_c = self.__canvas.coords(enemies[0])
 
-            if last_enemy_of_row_c[2] > 750 and way == 1 :
+            if last_enemy_of_row_c[20] > 750 and way == 1 :  #2
                 way = -1
-            elif first_enemy_of_row_c[0] < 50 and way == -1 :
+            elif first_enemy_of_row_c[4] < 50 and way == -1 : #0
                 y = 50
                 way = 1
             

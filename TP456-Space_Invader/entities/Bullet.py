@@ -43,10 +43,10 @@ class Bullet:
 
     def init_in_canvas(self):
         id = self.__canvas.create_rectangle(
-            self.__x,
+            self.__x - (self.__width/2),
             self.__y,
-            self.__x + self.__width,
-            self.__y + self.__height,
+            self.__x + (self.__width/2),
+            self.__y - self.__height,
             tags = self.__tag,
             fill = self.__color
         )

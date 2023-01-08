@@ -25,7 +25,7 @@ class AdvancedEnemy(BasicEnemy):
         if self.get_is_alive():
             bullet_tag = 'e_bullet'
             actual_enemy_coords = self.get_canvas().coords(self.get_id())
-            x = actual_enemy_coords[0] + (self.get_width() / 2)
-            y = actual_enemy_coords[1]
+            x = actual_enemy_coords[0] #+ (self.get_width() / 2)
+            y = actual_enemy_coords[1] #- self.get_height()
             Bullet(self.get_canvas(), bullet_tag, x, y, 'red').fire(self.bullet_speed, 1)
             self.define_fire()
