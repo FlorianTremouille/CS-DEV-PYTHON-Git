@@ -38,6 +38,7 @@ class Game:
         return player
 
     def init_level(self):
+        """Crée le niveau."""
         level = Level(self.__canvas)
         return level
 
@@ -52,6 +53,7 @@ class Game:
         self.game_transition(text)
 
     def display_game_lost(self):
+        
         text = 'PERDU !\n Vous avez atteint le niveau ' + str(self.__current_level.level_number) + '. \n Score : ' + str('SCORERERE')
         self.game_transition(text)
 

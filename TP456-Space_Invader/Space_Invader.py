@@ -7,8 +7,9 @@ Faire dans la console :
 
 TO DO :
 
-Implémentaton file : Ordonner l'apparition des ennemies par type dans une file puis ensuite les "summon"
-Implémenation pile : 
+Implémentaton file : Ordonner l'apparition des ennemies par type dans une file puis ensuite les "summon".
+                    file.append(X) puis file.pop(0)
+Implémenation pile : pile.append(x) puis pile.pop()
 
 """
 import os
@@ -26,7 +27,7 @@ bg_game_img : Tk.PhotoImage
 game : Game
 
 def start_menu():
-
+    """Crée et affiche la fenêtre de lancement."""
     global frame_menu, bg_frames_img
     frame_menu = Tk.Frame(window, bg= "red")
 
@@ -49,6 +50,7 @@ def start_menu():
     frame_menu.pack(fill=Tk.BOTH)
 
 def display_about():
+    """Crée et affiche la fenêtre 'A Propos'."""
     global about
 
     try:
@@ -69,6 +71,7 @@ def display_about():
     about.mainloop()
 
 def start_game(): 
+    """Crée la fenêtre de jeu et l'initialise."""
     global game, frame_game, bg_game_img, bg_frames_img
     frame_menu.destroy()
     
@@ -109,12 +112,14 @@ def start_game():
     game = Game(canvas)
 
 def restart():
+    """Relance une partie."""
     global game
     del game
     frame_game.destroy()
     start_game()
 
 def leave_game():
+    """Ferme la fenetre."""
     window.destroy()
 
 

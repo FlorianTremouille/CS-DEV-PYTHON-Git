@@ -54,6 +54,7 @@ class BasicEnemy:
             self.set_check_for_collision_after_id(self.get_canvas().after(30, lambda: self.check_for_collision()))
 
     def die_and_destroy_bullet(self, bullet):
+        
         self.__is_alive = False
         self.__canvas.after_cancel(self.get_check_for_collision_after_id())
         self.__canvas.delete(self.get_id())
