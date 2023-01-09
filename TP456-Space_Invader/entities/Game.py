@@ -7,6 +7,7 @@ from time import sleep
 
 from .Player import Player
 from .Level import Level
+from .Score import Score
 
 
 class Game: 
@@ -17,6 +18,9 @@ class Game:
         self.__img_player = PhotoImage(file='player_2.png')
         self.__player = self.init_player()
         self.is_player_alive()
+        
+        self.__score = Score(self.__canvas)
+        self.init_infos(self.__player.get_life_remaining())
         
         self.__current_level = self.init_level()
         self.is_level_finished()
@@ -35,6 +39,10 @@ class Game:
         player.set_id(id)
         player.check_for_collision()
         return player
+    
+    def init_infos(self, vies : int, score : int = 0):
+        self.__canvas.create_text(50,10,tags='score_text' ,text= 'Score : ' + str(self.__score.get_points()), fill='red', font=('Helvetica', '15'), justify='center')
+        self.__canvas.create_text(720,10,tags='life_text' ,text= 'Vies restantes : ' + str(vies), fill='red', font=('Helvetica', '15'), justify='center')
 
     def init_level(self):
         """Crée le niveau."""
@@ -53,8 +61,8 @@ class Game:
 
     def display_game_lost(self):
         
-        text = 'PERDU !\n Vous avez atteint le niveau ' + str(self.__current_level.level_number) + '. \n Score : ' + str('SCORERERE')
-        self.game_transition(text)
+        text = 'PERDU !\n Vous avez atteint le niveau ' + str(self.__current_level.level_number) + '. \n Score : ' + str(self.__score.get_points())
+        self.game_transition(text, False)
 
 
     def game_transition(self, text:str, delete_after_delay: bool = True):

@@ -77,18 +77,18 @@ def start_game():
     
     frame_game = Tk.Frame(window)
 
-    frame_game_info = Tk.Frame(frame_game)
+    # frame_game_info = Tk.Frame(frame_game)
 
-    bg_menu = Tk.Label(frame_game_info,image= bg_frames_img)
-    bg_menu.place(x = 0, y = 0)
+    # bg_menu = Tk.Label(frame_game_info,image= bg_frames_img)
+    # bg_menu.place(x = 0, y = 0)
 
-    score=Tk.Label(frame_game_info, text="Score : 0")
-    score.pack(anchor=Tk.N, side="left", padx= 5, pady= 5)
+    # score=Tk.Label(frame_game_info, text="Score : 0")
+    # score.pack(anchor=Tk.N, side="left", padx= 5, pady= 5)
 
-    NbVies=Tk.Label(frame_game_info, text="Vies : 3")
-    NbVies.pack(anchor= Tk.N, side="right", padx= 5, pady= 5)
+    # NbVies=Tk.Label(frame_game_info, text="Vies : 3")
+    # NbVies.pack(anchor= Tk.N, side="right", padx= 5, pady= 5)
 
-    frame_game_info.pack(fill=Tk.BOTH, side=Tk.TOP)
+    # frame_game_info.pack(fill=Tk.BOTH, side=Tk.TOP)
 
     canvas = Tk.Canvas(frame_game, width='800', height='700')
     canvas.create_image(400,350,image=bg_game_img)

@@ -23,7 +23,7 @@ class Player:
         self.__height = height
         self.__color = color
         self.is_alive = True
-        self.__remaining_lives = 1
+        self.__remaining_lives = 2
         self.__god_mod = False
 
         self.bind_inputs()
@@ -65,6 +65,17 @@ class Player:
 
     def set_god_mod(self, value: bool):
         self.__god_mod = value
+        self.__shining_life_value = value
+        self.shining_life()
+
+    def shining_life(self):
+        if self.__shining_life_value:
+            self.__canvas.itemconfig('life_text', fill='blue')
+            self.__canvas.after(150, lambda : self.__canvas.itemconfig('life_text', fill='red'))
+            self.__canvas.after(300, lambda : self.shining_life())
+
+    def get_life_remaining(self):
+        return self.__remaining_lives
 
 
     def bind_inputs(self):        
@@ -128,8 +139,8 @@ class Player:
             else:
                 self.__remaining_lives -= 1
                 self.set_god_mod(True)
-                self.__canvas.after(1*1000, lambda: self.set_god_mod(False))
-                print('-1 life')
+                self.__canvas.itemconfig('life_text', text='Vies restantes : ' + str(self.__remaining_lives))
+                self.__canvas.after(5*1000, lambda: self.set_god_mod(False))
 
     def player_dead(self):
         self.is_alive = False
