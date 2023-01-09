@@ -6,7 +6,7 @@ from tkinter import Canvas
 import json
 
 from .Army import Army
-from .Rock import Rock
+from .RocksGroups import RocksGroup
 
 
 
@@ -37,7 +37,7 @@ class Level:
         self.is_army_alive()
 
     def init_rock(self):
-        self.__rocks = Rock(self.__canvas)
+        self.__rocks = RocksGroup(self.__canvas)
 
     def is_army_alive(self):
         if not self.__current_army.is_army_alive:

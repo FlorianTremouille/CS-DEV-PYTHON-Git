@@ -1,7 +1,7 @@
 
 from tkinter import Canvas
 
-class Rock: 
+class RocksGroup: 
 
     def __init__(self, canvas : Canvas):
         self.__canvas = canvas
@@ -34,4 +34,4 @@ class Rock:
                 p2 = 500 + (dist*y)
                 p3 = spawn_point + (dist*(x+1))
                 p4 = 500 + (dist*(y+1))
-                self.__canvas.create_rectangle(p1, p2, p3, p4, fill='red')
+                id = self.__canvas.create_rectangle(p1, p2, p3, p4, fill='red')
