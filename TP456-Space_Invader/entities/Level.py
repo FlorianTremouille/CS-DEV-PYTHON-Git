@@ -16,8 +16,10 @@ class Level:
 
     def __init__(self, canvas : Canvas, level_number: int = 1):
         self.__canvas = canvas
+        
         self.level_number = level_number
         self.load_level()
+
         self.init_rock()   
 
     def load_level(self, level_name: str = 'level_1.json'):

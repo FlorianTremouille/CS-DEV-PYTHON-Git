@@ -1,6 +1,8 @@
 
 from tkinter import Canvas
 
+from .Rock import Rock
+
 class RocksGroup: 
 
     def __init__(self, canvas : Canvas):
@@ -11,7 +13,7 @@ class RocksGroup:
         self.__rock_placement = [
             (-1,-1), (0,-1), (1,-1),
             (-1,0), (0,0), (1,0),
-            (-1,1), (0,1), (1,1),
+            (-1,1), (0,1), (1,1)
             ]
 
         self.init_rock_spawn_points()
@@ -34,4 +36,8 @@ class RocksGroup:
                 p2 = 500 + (dist*y)
                 p3 = spawn_point + (dist*(x+1))
                 p4 = 500 + (dist*(y+1))
+
+                rock = Rock(self.__canvas)
                 id = self.__canvas.create_rectangle(p1, p2, p3, p4, fill='red')
+                rock.set_id(id)
+                rock.check_for_collision()
