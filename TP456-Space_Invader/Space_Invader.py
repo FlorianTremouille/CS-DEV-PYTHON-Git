@@ -12,10 +12,12 @@ Implémentaton file : Ordonner l'apparition des ennemies par type dans une file 
 Implémenation pile : pile.append(x) puis pile.pop()
 
 """
+import imp
 import os
 import tkinter as Tk
 
 from entities.Game import Game
+from entities.Score import Score
 
 working_dir = os.path.dirname(__file__)
 os.chdir(working_dir)
@@ -25,6 +27,7 @@ frame_game : Tk.Frame
 about : Tk.Tk
 bg_game_img : Tk.PhotoImage
 game : Game
+canvas : Tk.Canvas
 
 def start_menu():
     """Crée et affiche la fenêtre de lancement."""
@@ -72,7 +75,7 @@ def display_about():
 
 def start_game(): 
     """Crée la fenêtre de jeu et l'initialise."""
-    global game, frame_game, bg_game_img, bg_frames_img
+    global game, frame_game, bg_game_img, bg_frames_img, canvas
     frame_menu.destroy()
     
     frame_game = Tk.Frame(window)
@@ -114,7 +117,8 @@ def start_game():
 
 def restart():
     """Relance une partie."""
-    global game
+    global game, canvas
+    Score(canvas).reset_score()
     del game
     frame_game.destroy()
     start_game()

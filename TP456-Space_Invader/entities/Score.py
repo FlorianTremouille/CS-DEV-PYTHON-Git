@@ -19,12 +19,17 @@ class Score:
     def get_points(self):
         return self.__points
 
+    def reset_score(self):
+        self.__points = 0
+
     def update_score(self, enemy_type: str):
 
         if enemy_type == 'BasicEnemy':
             self.__points += 10
         elif enemy_type == 'AdvancedEnemy':
             self.__points += 25
+        elif enemy_type == 'BossEnemy':
+            self.__points += 150
         
         self.__canvas.itemconfig('score_text', text='Score : ' + str(self.__points))
    

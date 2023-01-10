@@ -3,10 +3,12 @@ Class s'occupant du groupe des ennemis.
 """
 
 from tkinter import Canvas
+from turtle import color, width
 
 from .EnemyType import EnemyType
 from .BasicEnemy import BasicEnemy
 from .AdvancedEnemy import AdvancedEnemy
+from .BossEnemy import BossEnemy
 
 class Army:
 
@@ -41,6 +43,8 @@ class Army:
                     enemy = BasicEnemy(self.__canvas)                
                 elif enemy_type == EnemyType.AdvancedEnemy.value:
                     enemy = AdvancedEnemy(self.__canvas)
+                elif enemy_type == EnemyType.BossEnemy.value:
+                    enemy = BossEnemy(self.__canvas)
 
                 scale = enemy.get_scale()/5
                 pts = [
@@ -64,8 +68,12 @@ class Army:
                     splinesteps=12,
                     tags = tag,
                     fill= enemy.get_color())
+
                 enemy.set_id(id)
                 enemy.check_for_collision()
+
+                if enemy_type == EnemyType.BossEnemy.value:
+                    self.__canvas.itemconfig(id, outline = 'green', width = 4)
 
                 x_start += enemy.get_scale() + space_between
             y_start += enemy.get_scale() + space_between

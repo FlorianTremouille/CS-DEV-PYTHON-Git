@@ -20,8 +20,20 @@ class AdvancedEnemy(BasicEnemy):
 
         self.define_fire()
 
+    def set_min_fire_delay(self, time : int):
+        self.__min_fire_delay = time
+
+    def set_max_fire_delay(self, time : int):
+        self.__max_fire_delay = time
+
+    def get_min_fire_delay(self) -> int:
+        return self.__min_fire_delay
+
+    def get_max_fire_delay(self) -> int:
+        return self.__max_fire_delay
+
     def define_fire(self):
-        random_timer = int(round(uniform(self.__min_fire_delay,self.__max_fire_delay),3))
+        random_timer = int(round(uniform(self.get_min_fire_delay(),self.get_max_fire_delay()),3))
         self.fire_bullet_after_id = self.get_canvas().after(random_timer*1000, lambda: self.fire_bullet())
 
     def fire_bullet(self):
