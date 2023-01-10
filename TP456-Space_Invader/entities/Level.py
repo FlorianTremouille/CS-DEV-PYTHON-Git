@@ -25,22 +25,28 @@ class Level:
 
     def load_level(self, level_name: str = 'level_1.json'):
         self.is_level_finished = False
-        with open('levels/'+level_name, ) as level_file: 
+        with open('levels_test/'+level_name, ) as level_file: 
             level = json.load(level_file)
             self.init_army(level)
 
     def increase_level(self):
         del self.__current_army
+
         self.level_number += 1
-        level = 'level_'+ str(self.level_number) + '.json'
+        level_to_load = self.level_number%5
+        if level_to_load == 0:
+            level_to_load = 5
+
+        level = 'level_'+ str(level_to_load) + '.json'
         self.load_level(level)
 
     def init_army(self, level : List):
-        self.__current_army = Army(self.__canvas, level)
+        speed_factor = (self.level_number-1)//5
+        self.__current_army = Army(self.__canvas, level, speed_factor)
         self.is_army_alive()
 
     def init_rock(self):
-        self.__rocks = RocksGroup(self.__canvas)
+        RocksGroup(self.__canvas)
 
     def is_army_alive(self):
         if not self.__current_army.is_army_alive:
