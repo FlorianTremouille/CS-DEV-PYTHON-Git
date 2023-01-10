@@ -3,7 +3,7 @@ Class s'occupant du groupe des ennemis.
 """
 
 from tkinter import Canvas
-from turtle import color, width
+
 
 from .EnemyType import EnemyType
 from .BasicEnemy import BasicEnemy
@@ -12,15 +12,16 @@ from .BossEnemy import BossEnemy
 
 class Army:
 
-    def __init__(self, canvas: Canvas, level):
+    def __init__(self, canvas: Canvas, level, speed_factor : int):
         self.__canvas = canvas
         self.__level = level
         self.__initial_wave_size = self.initial_wave_size()
 
-        # self.__initial_wave_size = 5
         self.is_army_alive = True
 
         self.init_enemies()
+        self.start_enemies_pattern(self.__initial_wave_size, speed_factor)
+
     
     def initial_wave_size(self):
         wave_size = 0
@@ -77,24 +78,30 @@ class Army:
 
                 x_start += enemy.get_scale() + space_between
             y_start += enemy.get_scale() + space_between
-
-        self.start_enemies_pattern(self.__initial_wave_size)
-
         
-    def start_enemies_pattern(self, last_enemy_count: int, way: int = 1, speed: float = 5):
+    def start_enemies_pattern(self, last_enemy_count : int, speed_factor: int, way: int = 1):
         y = 0
+        speed = speed_factor*2.5 + 5
         enemies = self.__canvas.find_withtag('enemy')
 
         if len(enemies) > 0 :
             new_enemy_count = len(enemies)
-            speed += ((last_enemy_count - new_enemy_count) / last_enemy_count) * speed * 0.5    
+            speed += ((last_enemy_count - new_enemy_count) / last_enemy_count) * speed * 0.5
+            
+            max_X_enemy_coord = self.__canvas.coords(enemies[-1])[20]
+            min_X_enemy_coord = self.__canvas.coords(enemies[0])[4]
 
-            last_enemy_of_row_c = self.__canvas.coords(enemies[-1])
-            first_enemy_of_row_c = self.__canvas.coords(enemies[0])
+            for enemy in enemies:
+                x_max = self.__canvas.coords(enemy)[20]
+                x_min = self.__canvas.coords(enemy)[4]
+                if x_max > max_X_enemy_coord:
+                    max_X_enemy_coord = x_max
+                if x_min < min_X_enemy_coord:
+                    min_X_enemy_coord = x_min
 
-            if last_enemy_of_row_c[20] > 750 and way == 1 :  #2
+            if max_X_enemy_coord > 750 and way == 1 :
                 way = -1
-            elif first_enemy_of_row_c[4] < 50 and way == -1 : #0
+            elif min_X_enemy_coord < 50 and way == -1 :
                 y = 50
                 way = 1
             
@@ -104,6 +111,6 @@ class Army:
                 elif way == -1:
                     self.__canvas.move(enemy, -speed, y)
             
-            self.__canvas.after(40, lambda: self.start_enemies_pattern(new_enemy_count, way, speed))     
+            self.__canvas.after(40, lambda: self.start_enemies_pattern(new_enemy_count, speed_factor, way))     
         else:
             self.is_army_alive = False

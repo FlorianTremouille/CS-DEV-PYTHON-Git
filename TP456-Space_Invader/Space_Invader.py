@@ -24,7 +24,6 @@ Gestion des niveaux :
 Partie perdue   :   
         Arrêt du jeu
 
-Pattern enemy : fix du beug quand on kill les mec à droite quand y a plusieurs lignes
 
 readme
 
