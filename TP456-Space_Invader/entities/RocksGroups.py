@@ -39,5 +39,6 @@ class RocksGroup:
 
                 rock = Rock(self.__canvas)
                 id = self.__canvas.create_rectangle(p1, p2, p3, p4, fill='red')
+                
                 rock.set_id(id)
                 rock.check_for_collision()
