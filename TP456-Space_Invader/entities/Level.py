@@ -4,6 +4,7 @@ Class s'occupant de la partie en générale. Elle coordonne les autres classes.
 
 from tkinter import Canvas
 import json
+from typing import List
 
 from .Army import Army
 from .RocksGroups import RocksGroup
@@ -34,7 +35,7 @@ class Level:
         level = 'level_'+ str(self.level_number) + '.json'
         self.load_level(level)
 
-    def init_army(self, level):
+    def init_army(self, level : List):
         self.__current_army = Army(self.__canvas, level)
         self.is_army_alive()
 

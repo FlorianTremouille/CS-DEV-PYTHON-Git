@@ -93,7 +93,7 @@ def start_game():
 
     # frame_game_info.pack(fill=Tk.BOTH, side=Tk.TOP)
 
-    canvas = Tk.Canvas(frame_game, width='800', height='700')
+    canvas = Tk.Canvas(frame_game, width='800', height='700', highlightthickness = 0)
     canvas.create_image(400,350,image=bg_game_img)
     canvas.pack(anchor=Tk.CENTER, side="top")
 
