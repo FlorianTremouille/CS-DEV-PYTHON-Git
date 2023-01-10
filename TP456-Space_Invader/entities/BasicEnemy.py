@@ -1,7 +1,7 @@
 """
 Class s'occupant des ennemies basiques.
 """
-from tkinter import _CanvasItemId, Canvas
+from tkinter import Canvas
 
 from .EnemyType import EnemyType
 from .Score import Score
@@ -57,7 +57,7 @@ class BasicEnemy:
         if (continue_check and self.get_is_alive()):    
             self.set_check_for_collision_after_id(self.get_canvas().after(30, lambda: self.check_for_collision()))
 
-    def die_and_destroy_bullet(self, bullet : _CanvasItemId):
+    def die_and_destroy_bullet(self, bullet):
         self.__is_alive = False
         self.__canvas.after_cancel(self.get_check_for_collision_after_id())
         self.__canvas.delete(self.get_id())

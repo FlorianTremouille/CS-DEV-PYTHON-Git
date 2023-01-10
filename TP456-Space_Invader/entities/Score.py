@@ -9,12 +9,10 @@ class Score:
 
     def __new__(cls, canvas : Canvas):
         if cls._instance is None:
-            print('Creating Score Object')
             cls._instance = super(Score, cls).__new__(cls)
         return cls._instance
 
     def __init__(self, canvas : Canvas):
-        print('__init__ Score')
         self.__canvas = canvas
         # self.__points = 0
     
