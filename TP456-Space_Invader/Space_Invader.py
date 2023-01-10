@@ -13,13 +13,7 @@ Implémentaton file : Ordonner l'apparition des ennemies par type dans une file 
 
 Implémenation pile : Faire apparaitre le LAST SCORE et permettre de supprimer le LAST SCORE dans le start menu.
                     pile.append(x) puis pile.pop()
-
-Gestion des niveaux : 
-        niveau 1,2,3,4 normaux 
-        niveau 5 boss
-        niveau 6,7,8,9 = niveau 1,2,3,4 plus vite
-        niveau 10 boss
-        .......
+                    
 
 Partie perdue   :   
         Arrêt du jeu
