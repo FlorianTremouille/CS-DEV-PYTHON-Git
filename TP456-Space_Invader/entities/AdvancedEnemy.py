@@ -15,10 +15,13 @@ class AdvancedEnemy(BasicEnemy):
     def __init__(self, canvas: Canvas, scale: int = 50, color: str = 'purple'):
         super().__init__(canvas, scale, color)
 
+        self.__min_fire_delay = 1
+        self.__max_fire_delay = 5
+
         self.define_fire()
 
     def define_fire(self):
-        random_timer = int(round(uniform(1,5),3))
+        random_timer = int(round(uniform(self.__min_fire_delay,self.__max_fire_delay),3))
         self.fire_bullet_after_id = self.get_canvas().after(random_timer*1000, lambda: self.fire_bullet())
 
     def fire_bullet(self):
