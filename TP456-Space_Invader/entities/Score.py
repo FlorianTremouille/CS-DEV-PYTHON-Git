@@ -36,4 +36,3 @@ class Score:
             self.__points += 150
         
         self.__canvas.itemconfig('score_text', text='Score : ' + str(self.__points))
-   

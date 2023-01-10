@@ -11,7 +11,7 @@ class Player:
 
     # bullet_fired = 0
     bullet_speed = 3
-    fire_cooldown = 0.2   #Temps en secondes
+    fire_cooldown = 0.1   #Temps en secondes
     last_fire_time = 0
 
 
@@ -23,7 +23,7 @@ class Player:
         self.__height = height
         self.__color = color
         self.is_alive = True
-        self.__remaining_lives = 2
+        self.__remaining_lives = 20
         self.__god_mod = False
 
         self.bind_inputs()

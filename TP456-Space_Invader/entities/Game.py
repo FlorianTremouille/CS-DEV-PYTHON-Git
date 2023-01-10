@@ -41,8 +41,8 @@ class Game:
         return player
     
     def init_infos(self, vies : int, score : int = 0):
-        self.__canvas.create_text(50,10,tags='score_text' ,text= 'Score : ' + str(self.__score.get_points()), fill='red', font=('Helvetica', '15'), justify='center')
-        self.__canvas.create_text(720,10,tags='life_text' ,text= 'Vies restantes : ' + str(vies), fill='red', font=('Helvetica', '15'), justify='center')
+        self.__canvas.create_text(60,10,tags='score_text' ,text= 'Score : ' + str(self.__score.get_points()), fill='red', font=('Helvetica', '15'), justify='center')
+        self.__canvas.create_text(715,10,tags='life_text' ,text= 'Vies restantes : ' + str(vies), fill='red', font=('Helvetica', '15'), justify='center')
 
     def init_level(self):
         """Crée le niveau."""
