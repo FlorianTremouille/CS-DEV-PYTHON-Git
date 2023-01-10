@@ -44,8 +44,8 @@ class BasicEnemy:
 
     def check_for_collision(self):        
         continue_check = False
-        c = self.get_canvas().coords(self.get_id())        
-        entitites = self.get_canvas().find_overlapping(c[0], c[1], c[2], c[3]) # a changer a cause du polygone       
+        c = self.get_canvas().coords(self.get_id())
+        entitites = self.get_canvas().find_overlapping(c[4], c[7], c[20], c[1]) # a changer a cause du polygone       
         
         for widget in entitites:
             for tag in self.get_canvas().gettags(widget):
