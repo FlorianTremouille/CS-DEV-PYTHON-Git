@@ -3,15 +3,18 @@ Class s'occupant des ennemies basiques.
 """
 from tkinter import Canvas
 
+from matplotlib import scale
+
 from .EnemyType import EnemyType
 from .Score import Score
 
 class BasicEnemy:
 
-    def __init__(self, canvas: Canvas, width: int = 50, height: int = 50, color: str = 'red'):
+    def __init__(self, canvas: Canvas, scale: int = 50, color: str = 'red'):
         self.__canvas = canvas
-        self.__width = width
-        self.__height = height
+        self.__scale = scale
+        # self.__width = width
+        # self.__height = height
         self.__color = color
         self.__is_alive = True
 
@@ -21,11 +24,14 @@ class BasicEnemy:
     def get_id(self):
         return self.__id
 
-    def get_width(self):
-        return self.__width
+    def get_scale(self):
+        return self.__scale
 
-    def get_height(self):
-        return self.__height
+    # def get_width(self):
+    #     return self.__width
+
+    # def get_height(self):
+    #     return self.__height
 
     def get_color(self):
         return self.__color

@@ -14,20 +14,17 @@ class Rock:
         self.__is_alive = value
 
     def check_for_collision(self):  
-        print('Continue check = TRUE')      
         c = self.__canvas.coords(self.__id)
-        entitites = self.__canvas.find_overlapping(c[0], c[1], c[2], c[3]) 
+        entitites = self.__canvas.find_overlapping(c[0], c[1], c[2], c[3])
         
         for widget in entitites:
             for tag in self.__canvas.gettags(widget):
                 if 'p_bullet' == tag:
-                    print('Player bullet contact')
                     self.destroy_contact_widget(widget)
                 if 'e_bullet' == tag:
                     self.die_and_destroy_widget(widget)
                 if 'enemy' == tag:
                     self.die_and_destroy_widget(widget)
-                # else: 
 
         if (self.__is_alive):    
             self.__canvas.after(30, lambda: self.check_for_collision())
@@ -39,6 +36,3 @@ class Rock:
 
     def destroy_contact_widget(self, widget):
         self.__canvas.delete(widget)
-
-
-

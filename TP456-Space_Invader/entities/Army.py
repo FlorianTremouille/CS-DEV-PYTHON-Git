@@ -28,7 +28,6 @@ class Army:
 
     def init_enemies(self):
         self.is_army_alive = True
-        e=10
         y_start = 5
         space_between = 20
         tag = 'enemy'
@@ -37,24 +36,27 @@ class Army:
             x_start = 50
             for enemy_type in enemy_raw:  
                 enemy = None
-                pts = [
-                    (x_start+2.5*e,y_start+5*e),
-                    (x_start+0.5*e,y_start+2*e),
-                    (x_start,y_start+1*e),
-                    (x_start+1*e,y_start),
-                    (x_start+2*e,y_start+1*e),
-                    (x_start+1.5*e,y_start+2*e),
-                    (x_start+2.5*e,y_start+3*e),
-                    (x_start+3.5*e,y_start+2*e),
-                    (x_start+3*e,y_start+1*e),
-                    (x_start+4*e,y_start),
-                    (x_start+5*e,y_start+1*e),
-                    (x_start+4.5*e,y_start+2*e),
-                    ]
+
                 if enemy_type == EnemyType.BasicEnemy.value:
                     enemy = BasicEnemy(self.__canvas)                
                 elif enemy_type == EnemyType.AdvancedEnemy.value:
                     enemy = AdvancedEnemy(self.__canvas)
+
+                scale = enemy.get_scale()/5
+                pts = [
+                    (x_start+2.5*scale,y_start+5*scale),
+                    (x_start+0.5*scale,y_start+2*scale),
+                    (x_start,y_start+1*scale),
+                    (x_start+1*scale,y_start),
+                    (x_start+2*scale,y_start+1*scale),
+                    (x_start+1.5*scale,y_start+2*scale),
+                    (x_start+2.5*scale,y_start+3*scale),
+                    (x_start+3.5*scale,y_start+2*scale),
+                    (x_start+3*scale,y_start+1*scale),
+                    (x_start+4*scale,y_start),
+                    (x_start+5*scale,y_start+1*scale),
+                    (x_start+4.5*scale,y_start+2*scale),
+                    ]
                 
                 id = self.__canvas.create_polygon(
                     pts,
@@ -65,8 +67,8 @@ class Army:
                 enemy.set_id(id)
                 enemy.check_for_collision()
 
-                x_start += enemy.get_width() + space_between
-            y_start += enemy.get_height() + space_between
+                x_start += enemy.get_scale() + space_between
+            y_start += enemy.get_scale() + space_between
 
         self.start_enemies_pattern(self.__initial_wave_size)
 

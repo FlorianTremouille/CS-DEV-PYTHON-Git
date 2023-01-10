@@ -7,8 +7,8 @@ class RocksGroup:
 
     def __init__(self, canvas : Canvas):
         self.__canvas = canvas
-        self.__rock_width = 40
-        self.__rocks_groups_number = 3
+        self.__rock_width = 20
+        self.__rocks_groups_number = 6
         self.__rocks_groups_spawn_points = []
         self.__rock_placement = [
             (-1,-1), (0,-1), (1,-1),
@@ -39,6 +39,6 @@ class RocksGroup:
 
                 rock = Rock(self.__canvas)
                 id = self.__canvas.create_rectangle(p1, p2, p3, p4, fill='red')
-                
+
                 rock.set_id(id)
                 rock.check_for_collision()
