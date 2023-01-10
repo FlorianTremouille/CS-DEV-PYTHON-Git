@@ -3,8 +3,6 @@ Class s'occupant des ennemies basiques.
 """
 from tkinter import Canvas
 
-from matplotlib import scale
-
 from .EnemyType import EnemyType
 from .Score import Score
 
@@ -57,7 +55,6 @@ class BasicEnemy:
             for tag in self.get_canvas().gettags(widget):
                 if 'p_bullet' == tag:
                     self.touch_and_destroy_bullet(widget)
-                    self.update_score(self.__class__.__name__)
                 else: 
                     continue_check = True
         if (continue_check and self.get_is_alive()):    
@@ -68,6 +65,7 @@ class BasicEnemy:
         self.__canvas.after_cancel(self.get_check_for_collision_after_id())
         self.__canvas.delete(self.get_id())
         self.__canvas.delete(bullet)
+        self.update_score(self.__class__.__name__)
 
     def update_score(self, enemy_type: str):        
         score = Score(self.__canvas)

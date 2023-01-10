@@ -49,5 +49,4 @@ class BossEnemy(AdvancedEnemy):
     def boss_dead(self):
         self.__is_alive = False
         self.get_canvas().delete(self.get_id())
-
-    
+        self.update_score(self.__class__.__name__)
