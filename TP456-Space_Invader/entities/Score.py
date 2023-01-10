@@ -1,3 +1,7 @@
+"""
+Class singleton qui s'occupe du compte et de l'actualisation de l'affichage du score.
+"""
+
 from tkinter import Canvas
 
 from .EnemyType import EnemyType
