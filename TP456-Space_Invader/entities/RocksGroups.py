@@ -23,9 +23,11 @@ class RocksGroup:
     def init_rock_spawn_points(self):
         self.__canvas.update()
         canvas_width = self.__canvas.winfo_width()
+        print(canvas_width)
         x_spawn_point = canvas_width / (self.__rocks_groups_number + 1)
         for i in range (1, self.__rocks_groups_number +1):
             self.__rocks_groups_spawn_points.append(x_spawn_point * i - (self.__rock_width/2) )
+        print(self.__rocks_groups_spawn_points)
 
     def init__rocks(self):
         dist = self.__rock_width

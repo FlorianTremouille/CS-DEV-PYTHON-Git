@@ -25,10 +25,10 @@ class Game:
         self.__current_level = self.init_level()
         self.is_level_finished()
 
-    def get_canvas(self):
+    def get_canvas(self) -> Canvas:
         return self.__canvas
 
-    def init_player(self):
+    def init_player(self) -> Player:
         player = Player(self.__canvas)
         id = self.__canvas.create_image(
             player.get_x(),
