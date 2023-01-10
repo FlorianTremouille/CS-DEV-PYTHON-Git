@@ -9,10 +9,26 @@ TO DO :
 
 Implémentaton file : Ordonner l'apparition des ennemies par type dans une file puis ensuite les "summon".
                     file.append(X) puis file.pop(0)
-Implémenation pile : pile.append(x) puis pile.pop()
+
+
+Implémenation pile : Faire apparaitre le LAST SCORE et permettre de supprimer le LAST SCORE dans le start menu.
+                    pile.append(x) puis pile.pop()
+
+Gestion des niveaux : 
+        niveau 1,2,3,4 normaux 
+        niveau 5 boss
+        niveau 6,7,8,9 = niveau 1,2,3,4 plus vite
+        niveau 10 boss
+        .......
+
+Partie perdue   :   
+        Arrêt du jeu
+
+Pattern enemy : fix du beug quand on kill les mec à droite quand y a plusieurs lignes
+
+readme
 
 """
-import imp
 import os
 import tkinter as Tk
 
@@ -79,19 +95,6 @@ def start_game():
     frame_menu.destroy()
     
     frame_game = Tk.Frame(window)
-
-    # frame_game_info = Tk.Frame(frame_game)
-
-    # bg_menu = Tk.Label(frame_game_info,image= bg_frames_img)
-    # bg_menu.place(x = 0, y = 0)
-
-    # score=Tk.Label(frame_game_info, text="Score : 0")
-    # score.pack(anchor=Tk.N, side="left", padx= 5, pady= 5)
-
-    # NbVies=Tk.Label(frame_game_info, text="Vies : 3")
-    # NbVies.pack(anchor= Tk.N, side="right", padx= 5, pady= 5)
-
-    # frame_game_info.pack(fill=Tk.BOTH, side=Tk.TOP)
 
     canvas = Tk.Canvas(frame_game, width='800', height='700', highlightthickness = 0)
     canvas.create_image(400,350,image=bg_game_img)
