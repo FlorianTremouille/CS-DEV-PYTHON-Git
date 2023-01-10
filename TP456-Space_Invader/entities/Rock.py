@@ -2,38 +2,38 @@
 
 from tkinter import Canvas
 
-
-
 class Rock:
     def __init__(self, canvas : Canvas):
         self.__canvas = canvas
+        self.__is_alive = True
 
-    def set_id(self,id):
+    def set_id(self,id : int) -> None:
         self.__id = id
 
-    def check_for_collision(self):        
-        continue_check = False
+    def set_is_alive(self,value : bool):
+        self.__is_alive = value
+
+    def check_for_collision(self):  
+        print('Continue check = TRUE')      
         c = self.__canvas.coords(self.__id)
-        print(c)     
-        entitites = self.__canvas.find_overlapping(c[0], c[1], c[2], c[3]) # a changer a cause du polygone       
+        entitites = self.__canvas.find_overlapping(c[0], c[1], c[2], c[3]) 
         
         for widget in entitites:
             for tag in self.__canvas.gettags(widget):
                 if 'p_bullet' == tag:
                     print('Player bullet contact')
                     self.destroy_contact_widget(widget)
-                    continue_check = True
                 if 'e_bullet' == tag:
                     self.die_and_destroy_widget(widget)
                 if 'enemy' == tag:
                     self.die_and_destroy_widget(widget)
-                else: 
-                    continue_check = True
-                    print('Continue check = TRUE')
-        if (continue_check):    
+                # else: 
+
+        if (self.__is_alive):    
             self.__canvas.after(30, lambda: self.check_for_collision())
 
     def die_and_destroy_widget(self, widget):
+        self.set_is_alive(False)
         self.__canvas.delete(self.__id)
         self.destroy_contact_widget(widget)
 

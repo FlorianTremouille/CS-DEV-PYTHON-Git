@@ -133,7 +133,6 @@ class Player:
 
     def life_loose(self):
         if self.__god_mod == False:
-            print(self.__remaining_lives)
             if self.__remaining_lives == 0 :
                 self.player_dead()
             else:
