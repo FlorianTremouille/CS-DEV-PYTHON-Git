@@ -9,6 +9,8 @@ class Bullet:
 
     def __init__(self, canvas: Canvas, tag: str, x: float, y: float, color: str = 'green', width: int = 10, height: int = 30):
         self.__canvas = canvas
+        self.__canvas_height = self.__canvas.winfo_height()
+
         self.__tag = tag
         self.__x = x
         self.__y = y
@@ -59,5 +61,6 @@ class Bullet:
 
     def check_fire_out_of_range(self):
         c = self.__canvas.coords(self.__id)
-        if len(c)>1 and (c[1] < 0 or c[3] > 700) :
+        if len(c)>1 and (c[3] < 0 or c[1] > self.__canvas_height):
+            print('bullet destroy')
             self.__canvas.delete(self.__id)

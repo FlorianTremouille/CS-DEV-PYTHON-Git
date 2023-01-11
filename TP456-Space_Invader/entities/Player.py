@@ -23,7 +23,7 @@ class Player:
         self.__height = height
         self.__color = color
         self.is_alive = True
-        self.__remaining_lives = 20
+        self.__remaining_lives = 0
         self.__god_mod = False
 
         self.bind_inputs()
@@ -83,15 +83,16 @@ class Player:
         self.__listener.start() 
             
     def on_press_handlers(self, key):
-        if (key == Key.left):
-            self.move_left()
-        if (key == Key.right):
-            self.move_right()
-        if (key == Key.space):
-            actual_time = time()
-            if actual_time - self.last_fire_time >= self.fire_cooldown:
-                self.last_fire_time = actual_time
-                self.fire_bullet()
+        if self.is_alive:
+            if (key == Key.left):
+                self.move_left()
+            if (key == Key.right):
+                self.move_right()
+            if (key == Key.space):
+                actual_time = time()
+                if actual_time - self.last_fire_time >= self.fire_cooldown:
+                    self.last_fire_time = actual_time
+                    self.fire_bullet()
 
     def move_left(self):
         if self.__canvas.coords('player')[0]-25 > 25:

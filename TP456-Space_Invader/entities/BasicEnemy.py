@@ -8,7 +8,7 @@ from .Score import Score
 
 class BasicEnemy:
 
-    def __init__(self, canvas: Canvas, scale: int = 50, color: str = 'red'):
+    def __init__(self, canvas: Canvas, scale: int = 50, color: str = 'darkred'):
         self.__canvas = canvas
         self.__scale = scale
         # self.__width = width

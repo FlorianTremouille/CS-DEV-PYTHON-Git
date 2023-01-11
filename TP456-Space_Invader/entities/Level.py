@@ -25,7 +25,7 @@ class Level:
 
     def load_level(self, level_name: str = 'level_1.json'):
         self.is_level_finished = False
-        with open('levels_test/'+level_name, ) as level_file: 
+        with open('levels/'+level_name, ) as level_file: 
             level = json.load(level_file)
             self.init_army(level)
 
