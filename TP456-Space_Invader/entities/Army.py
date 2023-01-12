@@ -81,7 +81,7 @@ class Army:
         
     def start_enemies_pattern(self, last_enemy_count : int, speed_factor: int, way: int = 1):
         y = 0
-        speed = speed_factor*2.5 + 50
+        speed = speed_factor*2.5 + 5
         enemies = self.__canvas.find_withtag('enemy')
 
         if len(enemies) > 0 :
