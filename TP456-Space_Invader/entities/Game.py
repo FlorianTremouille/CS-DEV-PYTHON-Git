@@ -60,10 +60,8 @@ class Game:
         self.game_transition(text)
 
     def display_game_lost(self):
-        
-        text = 'PERDU !\n Vous avez atteint le niveau ' + str(self.__current_level.level_number) + '. \n Score : ' + str(self.__score.get_points())
+        text = 'PERDU !\n Vous avez atteint le niveau ' + str(self.__current_level.level_number) + '. \n Score : ' + str(self.__score.get_points()) + '. \n Meilleur Score : ' + str(self.__score.get_best())
         self.game_transition(text, False)
-
 
     def game_transition(self, text:str, delete_after_delay: bool = True):
         id = self.__canvas.create_text(400, 350, text=text, fill='red', font=('Helvetica', '32'), justify='center')
@@ -71,7 +69,12 @@ class Game:
             self.__canvas.after(3*1000,lambda: self.erase_text(id))
 
     def game_lost(self):
+        self.__score.save_if_new_best()
         self.display_game_lost()
+        self.__canvas.delete('p_bullet')
+        self.__canvas.addtag_withtag('disabled','rock')
+
+        
 
     def erase_text(self,id):
         self.__canvas.delete(id)

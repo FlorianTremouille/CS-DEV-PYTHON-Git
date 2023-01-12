@@ -13,21 +13,22 @@ class Rock:
     def set_is_alive(self,value : bool):
         self.__is_alive = value
 
-    def check_for_collision(self):  
-        c = self.__canvas.coords(self.__id)
-        entitites = self.__canvas.find_overlapping(c[0], c[1], c[2], c[3])
-        
-        for widget in entitites:
-            for tag in self.__canvas.gettags(widget):
-                if 'p_bullet' == tag:
-                    self.destroy_contact_widget(widget)
-                if 'e_bullet' == tag:
-                    self.die_and_destroy_widget(widget)
-                if 'enemy' == tag:
-                    self.die_and_destroy_widget(widget)
+    def check_for_collision(self):
+        if len(self.__canvas.gettags(self.__id)) == 1:
+            c = self.__canvas.coords(self.__id)
+            entitites = self.__canvas.find_overlapping(c[0], c[1], c[2], c[3])
+            
+            for widget in entitites:
+                for tag in self.__canvas.gettags(widget):
+                    if 'p_bullet' == tag:
+                        self.destroy_contact_widget(widget)
+                    if 'e_bullet' == tag:
+                        self.die_and_destroy_widget(widget)
+                    if 'enemy' == tag:
+                        self.die_and_destroy_widget(widget)
 
-        if (self.__is_alive):    
-            self.__canvas.after(30, lambda: self.check_for_collision())
+            if (self.__is_alive):    
+                self.__canvas.after(30, lambda: self.check_for_collision())
 
     def die_and_destroy_widget(self, widget):
         self.set_is_alive(False)

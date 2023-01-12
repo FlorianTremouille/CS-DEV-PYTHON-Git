@@ -137,6 +137,3 @@ class Player:
 
     def player_dead(self):
         self.is_alive = False
-
-    def __exit__(self):
-        self.__listener.join()

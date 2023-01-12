@@ -17,15 +17,15 @@ class Level:
 
     def __init__(self, canvas : Canvas, level_number: int = 1):
         self.__canvas = canvas
+
+        self.init_rock()
         
         self.level_number = level_number
-        self.load_level()
-
-        self.init_rock()   
+        self.load_level()   
 
     def load_level(self, level_name: str = 'level_1.json'):
         self.is_level_finished = False
-        with open('levels_test/'+level_name, ) as level_file: 
+        with open('levels/'+level_name, ) as level_file: 
             level = json.load(level_file)
             self.init_army(level)
 

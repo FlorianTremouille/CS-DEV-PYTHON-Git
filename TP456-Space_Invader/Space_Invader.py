@@ -33,25 +33,34 @@ os.chdir(working_dir)
 
 frame_menu : Tk.Frame
 frame_game : Tk.Frame
+best_score : Tk.Label
 about : Tk.Tk
 bg_game_img : Tk.PhotoImage
 game : Game
 canvas : Tk.Canvas
+menu_font : tuple = ('Helvetica', '12')
 
 def start_menu():
     """Crée et affiche la fenêtre de lancement."""
-    global frame_menu, bg_frames_img
+    global frame_menu, bg_frames_img, menu_font, best_score
+
     frame_menu = Tk.Frame(window, bg= "red")
 
-    bg_menu = Tk.Label(frame_menu,image= bg_frames_img)
+    bg_menu = Tk.Label(frame_menu, image= bg_frames_img)
     bg_menu.place(x = 0, y = 0)
 
     about_btn = Tk.Button(frame_menu,text="A propos", command=display_about)
     about_btn.pack()
 
-    game_title = Tk.Label(frame_menu, text="SPACE INVADER")
+    game_title = Tk.Label(frame_menu, text="SPACE INVADER", font=menu_font)
+    game_title.pack(padx= 100, pady= (100,100))
 
-    game_title.pack(padx= 100, pady= (100,0))
+    best_score_text = "Meilleur score : \n" + str(Score().get_best())
+    best_score = Tk.Label(frame_menu, text = best_score_text, bg=None, font=menu_font)
+    best_score.pack(padx= 100, pady= (0,0))
+
+    del_best = Tk.Button(frame_menu, text="Supprimer le dernier meilleur score.", font = ('Helvetica', '8') , command=delete_last_best_score)
+    del_best.pack(padx= 100, pady= (0,0))
 
     play_btn = Tk.Button(frame_menu, text="Jouer",command=start_game)
     play_btn.pack(anchor=Tk.S, side="left", padx= 5, pady= (50,5))
@@ -81,6 +90,13 @@ def display_about():
     author_title.pack(padx= 100)
 
     about.mainloop()
+
+def delete_last_best_score():
+    global best_score
+    if len(Score().read_bests()) > 1: 
+        Score().delete_last_best()
+        best_score_text = "Meilleur score : \n" + str(Score().get_best())
+        best_score.config(text= best_score_text)
 
 def start_game(): 
     """Crée la fenêtre de jeu et l'initialise."""

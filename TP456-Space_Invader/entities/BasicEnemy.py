@@ -11,8 +11,6 @@ class BasicEnemy:
     def __init__(self, canvas: Canvas, scale: int = 50, color: str = 'darkred'):
         self.__canvas = canvas
         self.__scale = scale
-        # self.__width = width
-        # self.__height = height
         self.__color = color
         self.__is_alive = True
 
@@ -36,7 +34,6 @@ class BasicEnemy:
 
     def check_for_collision(self):        
         if self.__is_alive:
-            print('collision check')
             c = self.get_canvas().coords(self.get_id())
             entitites = self.get_canvas().find_overlapping(c[4], c[7], c[20], c[1]) # adapté au polygone     
             
