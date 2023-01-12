@@ -25,7 +25,7 @@ class Level:
 
     def load_level(self, level_name: str = 'level_1.json'):
         self.is_level_finished = False
-        with open('levels/'+level_name, ) as level_file: 
+        with open('levels_test/'+level_name, ) as level_file: 
             level = json.load(level_file)
             self.init_army(level)
 
@@ -50,10 +50,9 @@ class Level:
 
     def is_army_alive(self):
         if not self.__current_army.is_army_alive:
-            self.__canvas.after_cancel(self.__is_army_alive_after_id)
             self.is_level_finished = True            
         else:
-            self.__is_army_alive_after_id = self.__canvas.after(500, lambda: self.is_army_alive())        
+            self.__canvas.after(500, lambda: self.is_army_alive())        
     
     
 

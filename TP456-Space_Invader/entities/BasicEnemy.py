@@ -25,20 +25,8 @@ class BasicEnemy:
     def get_scale(self):
         return self.__scale
 
-    # def get_width(self):
-    #     return self.__width
-
-    # def get_height(self):
-    #     return self.__height
-
     def get_color(self):
         return self.__color
-
-    def get_check_for_collision_after_id(self):
-        return self.__check_for_collision_after_id
-    
-    def set_check_for_collision_after_id(self, id):
-        self.__check_for_collision_after_id = id
 
     def get_is_alive(self):
         return self.__is_alive
@@ -47,22 +35,19 @@ class BasicEnemy:
         self.__id = id        
 
     def check_for_collision(self):        
-        continue_check = False
-        c = self.get_canvas().coords(self.get_id())
-        entitites = self.get_canvas().find_overlapping(c[4], c[7], c[20], c[1]) # adapté au polygone     
-        
-        for widget in entitites:
-            for tag in self.get_canvas().gettags(widget):
-                if 'p_bullet' == tag:
-                    self.touch_and_destroy_bullet(widget)
-                else: 
-                    continue_check = True
-        if (continue_check and self.get_is_alive()):    
-            self.set_check_for_collision_after_id(self.get_canvas().after(30, lambda: self.check_for_collision()))
+        if self.__is_alive:
+            print('collision check')
+            c = self.get_canvas().coords(self.get_id())
+            entitites = self.get_canvas().find_overlapping(c[4], c[7], c[20], c[1]) # adapté au polygone     
+            
+            for widget in entitites:
+                for tag in self.get_canvas().gettags(widget):
+                    if 'p_bullet' == tag:
+                        self.touch_and_destroy_bullet(widget)
+            self.get_canvas().after(30, lambda: self.check_for_collision())
 
     def touch_and_destroy_bullet(self, bullet):
         self.__is_alive = False
-        self.__canvas.after_cancel(self.get_check_for_collision_after_id())
         self.__canvas.delete(self.get_id())
         self.__canvas.delete(bullet)
         self.update_score(self.__class__.__name__)

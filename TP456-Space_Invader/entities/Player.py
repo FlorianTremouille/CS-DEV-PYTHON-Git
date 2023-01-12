@@ -53,12 +53,6 @@ class Player:
 
     def get_id(self):
         return self.__id
-    
-    def set_check_for_collision_after_id(self, id):
-        self.__check_for_collision_after_id = id
-    
-    def get_check_for_collision_after_id(self):
-        return self.__check_for_collision_after_id
 
     def get_is_alive(self):
         return self.is_alive
@@ -114,23 +108,22 @@ class Player:
         Bullet(self.__canvas, bullet_tag, x, y).fire(self.bullet_speed)
 
     def check_for_collision(self):
-        c = self.get_canvas().coords(self.get_id())
-        w = self.__width
-        h = self.__height
-        entitites = self.get_canvas().find_overlapping(c[0] - w/2, c[1] - h/2, c[0] + w/2, c[1] + h/2)      
+        if self.get_is_alive():
+            c = self.get_canvas().coords(self.get_id())
+            w = self.__width
+            h = self.__height
+            entitites = self.get_canvas().find_overlapping(c[0] - w/2, c[1] - h/2, c[0] + w/2, c[1] + h/2)      
 
-        for widget in entitites:
-            pass
-            for tag in self.get_canvas().gettags(widget):
-                if 'e_bullet' == tag:
-                    self.life_loose()
-                    self.__canvas.delete(widget)
-                if 'enemy' == tag:
-                    self.player_dead()
-                else: 
-                        continue_check = True
-        if (continue_check and self.get_is_alive()):    
-            self.set_check_for_collision_after_id(self.get_canvas().after(30, lambda: self.check_for_collision()))
+            for widget in entitites:
+                pass
+                for tag in self.get_canvas().gettags(widget):
+                    if 'e_bullet' == tag:
+                        self.life_loose()
+                        self.__canvas.delete(widget)
+                    if 'enemy' == tag:
+                        self.player_dead()
+
+            self.get_canvas().after(30, lambda: self.check_for_collision())
 
     def life_loose(self):
         if self.__god_mod == False:
@@ -144,7 +137,6 @@ class Player:
 
     def player_dead(self):
         self.is_alive = False
-        self.__canvas.after_cancel(self.get_check_for_collision_after_id())
 
     def __exit__(self):
         self.__listener.join()

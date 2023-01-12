@@ -78,14 +78,12 @@ class Game:
 
     def is_level_finished(self):
         if self.__current_level.is_level_finished:
-            self.__canvas.after_cancel(self.__is_level_finished_after_id)
             self.set_next_level()
         else:
-            self.__is_level_finished_after_id = self.__canvas.after(500, lambda: self.is_level_finished())
+            self.__canvas.after(500, lambda: self.is_level_finished())
 
     def is_player_alive(self):
-        if not self.__player.is_alive:
-            self.__canvas.after_cancel(self.__is_player_alive_after_id)
+        if self.__player.is_alive == False:
             self.game_lost()
         else:
-            self.__is_player_alive_after_id = self.__canvas.after(500, lambda: self.is_player_alive())
+            self.__canvas.after(500, lambda: self.is_player_alive())

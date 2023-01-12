@@ -17,6 +17,8 @@ class Bullet:
         self.__width = width
         self.__height = height
         self.__color = color
+
+        self.__bullet_display = True
         self.init_in_canvas()
 
     def get_canvas(self):
@@ -43,6 +45,9 @@ class Bullet:
     def get_interval_id(self):
         return self.__interval_id
 
+    def set_bullet_display(self, value : bool):
+        self.__bullet_display = value
+
     def init_in_canvas(self):
         id = self.__canvas.create_rectangle(
             self.__x - (self.__width/2),
@@ -55,12 +60,18 @@ class Bullet:
         self.__id = id
 
     def fire(self, speed: float, way: int = -1):
-        self.__canvas.move(self.__id, 0, way * 3 * speed)
-        self.check_fire_out_of_range()
-        self.__interval_id = self.__canvas.after(30, lambda: self.fire(speed, way))
+        if self.__bullet_display:
+            self.__canvas.move(self.__id, 0, way * 3 * speed)
+            self.check_fire_on_screen()
+            self.__interval_id = self.__canvas.after(30, lambda: self.fire(speed, way))
 
-    def check_fire_out_of_range(self):
+    def check_fire_on_screen(self):
         c = self.__canvas.coords(self.__id)
         if len(c)>1 and (c[3] < 0 or c[1] > self.__canvas_height):
-            print('bullet destroy')
-            self.__canvas.delete(self.__id)
+            self.kill_bullet()
+        if len(c) == 0:
+            self.kill_bullet()
+    
+    def kill_bullet(self):
+        self.set_bullet_display(False)
+        self.__canvas.delete(self.__id)
