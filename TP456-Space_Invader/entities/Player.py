@@ -1,6 +1,8 @@
 """
 Class s'occupant du joueur.
 """
+
+
 from tkinter import Canvas
 from pynput.keyboard import Key, Listener
 from time import time
@@ -9,9 +11,8 @@ from .Bullet import Bullet
 
 class Player:
 
-    # bullet_fired = 0
     bullet_speed = 3
-    fire_cooldown = 0.1   #Temps en secondes
+    fire_cooldown = 0.5   #Temps en secondes
     last_fire_time = 0
 
 
@@ -23,12 +24,10 @@ class Player:
         self.__height = height
         self.__color = color
         self.is_alive = True
-        self.__remaining_lives = 0
+        self.__remaining_lives = 3
         self.__god_mod = False
 
         self.bind_inputs()
-
-
 
     def get_canvas(self):
         return self.__canvas
@@ -48,7 +47,7 @@ class Player:
     def get_color(self):
         return self.__color
     
-    def set_id(self, id):
+    def set_id(self, id : int):
         self.__id = id
 
     def get_id(self):
@@ -57,7 +56,7 @@ class Player:
     def get_is_alive(self):
         return self.is_alive
 
-    def set_god_mod(self, value: bool):
+    def set_god_mod(self, value : bool):
         self.__god_mod = value
         self.__shining_life_value = value
         self.shining_life()
@@ -70,7 +69,6 @@ class Player:
 
     def get_life_remaining(self):
         return self.__remaining_lives
-
 
     def bind_inputs(self):        
         self.__listener = Listener(on_press=self.on_press_handlers) 

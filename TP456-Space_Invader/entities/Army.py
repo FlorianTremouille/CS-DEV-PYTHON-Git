@@ -15,15 +15,14 @@ class Army:
     def __init__(self, canvas: Canvas, level, speed_factor : int):
         self.__canvas = canvas
         self.__level = level
-        self.__initial_wave_size = self.initial_wave_size()
 
-        self.is_army_alive = True
+        self.__initial_wave_size = self.initial_wave_size()
 
         self.init_enemies()
         self.start_enemies_pattern(self.__initial_wave_size, speed_factor)
 
     
-    def initial_wave_size(self):
+    def initial_wave_size(self) -> int:
         wave_size = 0
         for enemy_raw in self.__level:
             wave_size += len(enemy_raw)

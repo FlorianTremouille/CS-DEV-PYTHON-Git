@@ -1,6 +1,5 @@
 """
 Class s'occupant des tirs.
-
 """
 
 from tkinter import Canvas;
@@ -41,9 +40,6 @@ class Bullet:
 
     def get_color(self):        
         return self.__color
-
-    def get_interval_id(self):
-        return self.__interval_id
 
     def set_bullet_display(self, value : bool):
         self.__bullet_display = value

@@ -1,3 +1,7 @@
+"""
+Class permettant l'identification des enemies.
+"""
+
 from enum import Enum
 
 class EnemyType(Enum):

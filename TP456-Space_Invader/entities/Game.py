@@ -45,8 +45,7 @@ class Game:
 
     def init_level(self):
         """Crée le niveau."""
-        level = Level(self.__canvas)
-        return level
+        return Level(self.__canvas)
 
     def set_next_level(self):
         self.display_level_won()
@@ -62,7 +61,7 @@ class Game:
         text = 'PERDU !\n Vous avez atteint le niveau ' + str(self.__current_level.level_number) + '. \n Score : ' + str(self.__score.get_points()) + '\n Meilleur Score : ' + str(self.__score.get_best())
         self.game_transition(text, False)
 
-    def game_transition(self, text:str, delete_after_delay: bool = True):
+    def game_transition(self, text : str, delete_after_delay : bool = True):
         id = self.__canvas.create_text(400, 300, text=text, fill='red', font=('Helvetica', '32'), justify='center')
         if delete_after_delay:
             self.__canvas.after(3*1000,lambda: self.erase_text(id))
@@ -74,7 +73,7 @@ class Game:
         self.__canvas.addtag_withtag('disabled','rock')
         self.__canvas.delete('player')
 
-    def erase_text(self,id):
+    def erase_text(self, id : int):
         self.__canvas.delete(id)
 
     def is_level_finished(self):

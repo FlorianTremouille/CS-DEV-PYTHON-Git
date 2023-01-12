@@ -1,5 +1,5 @@
 """
-Class s'occupant du Boss dans le level 5
+Class s'occupant du Boss dans le level 5.
 """
 
 from tkinter import Canvas
@@ -16,8 +16,8 @@ class BossEnemy(AdvancedEnemy):
 
         self.__remaining_lives = 2
 
-        # self.set_min_fire_delay(0)
-        # self.set_max_fire_delay(1)
+        self.set_min_fire_delay(0.5)
+        self.set_max_fire_delay(3)
 
 
     def fire_bullet(self):

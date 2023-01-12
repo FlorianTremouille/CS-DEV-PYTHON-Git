@@ -1,3 +1,7 @@
+"""
+Class s'occupant de la création de rochers.
+Utilisation d'une liste.
+"""
 
 from tkinter import Canvas
 
@@ -18,7 +22,6 @@ class RocksGroup:
 
         self.init_rock_spawn_points()
         self.init__rocks()
-
 
     def init_rock_spawn_points(self):
         self.__canvas.update()

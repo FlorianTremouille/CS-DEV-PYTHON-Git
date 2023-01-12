@@ -13,6 +13,7 @@ Implémentaton file : Ordonner l'apparition des ennemies par type dans une file 
 
 Implémenation pile : Faire apparaitre le LAST SCORE et permettre de supprimer le LAST SCORE dans le start menu.
                     pile.append(x) puis pile.pop()
+                    STOCKAGE DU BEST SCORE
                     
 
 Partie perdue   :   

@@ -1,4 +1,6 @@
-
+"""
+Class s'occupant des rochers.
+"""
 
 from tkinter import Canvas
 

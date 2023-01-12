@@ -1,6 +1,7 @@
 """
-Class s'occupant de la partie en générale. Elle coordonne les autres classes.
+Class s'occupant du chargement des niveaux. Leur chargement et leur difficulté.
 """
+
 
 from tkinter import Canvas
 import json
@@ -10,12 +11,11 @@ from .Army import Army
 from .RocksGroups import RocksGroup
 
 
-
 class Level: 
 
     is_level_finished = False
 
-    def __init__(self, canvas : Canvas, level_number: int = 1):
+    def __init__(self, canvas : Canvas, level_number : int = 1):
         self.__canvas = canvas
 
         self.init_rock()
@@ -23,7 +23,7 @@ class Level:
         self.level_number = level_number
         self.load_level()   
 
-    def load_level(self, level_name: str = 'level_1.json'):
+    def load_level(self, level_name : str = 'level_1.json'):
         self.is_level_finished = False
         with open('levels/'+level_name, ) as level_file: 
             level = json.load(level_file)
@@ -40,7 +40,7 @@ class Level:
         level = 'level_'+ str(level_to_load) + '.json'
         self.load_level(level)
 
-    def init_army(self, level : List):
+    def init_army(self, level : list):
         speed_factor = (self.level_number-1)//5
         self.__current_army = Army(self.__canvas, level, speed_factor)
         self.is_army_alive()
@@ -52,8 +52,4 @@ class Level:
         if not self.__current_army.is_army_alive:
             self.is_level_finished = True            
         else:
-            self.__canvas.after(500, lambda: self.is_army_alive())        
-    
-    
-
-
+            self.__canvas.after(500, lambda: self.is_army_alive())

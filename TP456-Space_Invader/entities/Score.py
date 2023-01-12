@@ -1,5 +1,6 @@
 """
 Class singleton qui s'occupe du compte et de l'actualisation de l'affichage du score.
+Utilisation d'une pile.
 """
 
 from tkinter import Canvas
@@ -48,7 +49,7 @@ class Score:
         best_scores_lst.pop()
         self.write_bests(best_scores_lst)
 
-    def get_best(self):
+    def get_best(self) -> int:
         return self.read_bests().pop()
 
     def read_bests(self) -> list:
