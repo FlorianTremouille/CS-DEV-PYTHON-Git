@@ -5,7 +5,6 @@ Class s'occupant du chargement des niveaux. Leur chargement et leur difficulté.
 
 from tkinter import Canvas
 import json
-from typing import List
 
 from .Army import Army
 from .RocksGroups import RocksGroup
