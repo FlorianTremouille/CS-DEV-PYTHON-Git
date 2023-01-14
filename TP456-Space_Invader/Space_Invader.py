@@ -26,8 +26,8 @@ readme
 import os
 import tkinter as Tk
 
-from entities.Game import Game
-from entities.Score import Score
+from data.entities.Game import Game
+from data.entities.Score import Score
 
 working_dir = os.path.dirname(__file__)
 os.chdir(working_dir)
@@ -144,8 +144,8 @@ def leave_game():
 window = Tk.Tk()
 window.title('Space INVADATEUR')
 
-bg_game_img= Tk.PhotoImage(file='game_bg.gif')
-bg_frames_img= Tk.PhotoImage(file='frame_bg.gif')
+bg_game_img= Tk.PhotoImage(file='data/images/game_bg.gif')
+bg_frames_img= Tk.PhotoImage(file='data/images/frame_bg.gif')
 
 
 start_menu()

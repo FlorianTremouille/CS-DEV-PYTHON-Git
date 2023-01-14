@@ -43,7 +43,6 @@ class BasicEnemy:
             self.get_canvas().after(30, lambda: self.check_for_collision())
 
     def touch_and_destroy_bullet(self, bullet : int):
-        print(bullet)
         self.__is_alive = False
         self.__canvas.delete(self.get_id())
         self.__canvas.delete(bullet)

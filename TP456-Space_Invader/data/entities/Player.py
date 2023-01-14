@@ -86,7 +86,6 @@ class Player:
                     self.last_fire_time = actual_time
                     self.fire_bullet()
             if 'char' in dir(key):
-                print(key.char)
                 if (key.char == 'l'):
                     self.add_life()
                 if (key.char == 'g'):

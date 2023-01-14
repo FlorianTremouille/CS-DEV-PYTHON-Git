@@ -14,7 +14,7 @@ class Game:
     def __init__(self, canvas: Canvas): 
         self.__canvas = canvas
 
-        self.__img_player = PhotoImage(file='player_2.png')
+        self.__img_player = PhotoImage(file='data/images/player_2.png')
         self.__player = self.init_player()
         self.is_player_alive()
         
