@@ -30,7 +30,7 @@ class Army:
 
     def init_enemies(self):
         self.is_army_alive = True
-        y_start = 5
+        y_start = 25
         space_between = 20
         tag = 'enemy'
 

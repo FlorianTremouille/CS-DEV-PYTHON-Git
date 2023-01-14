@@ -53,10 +53,10 @@ class Score:
         return self.read_bests().pop()
 
     def read_bests(self) -> list:
-        with open('scores.json', 'r') as score_file:
+        with open('best_scores.json', 'r') as score_file:
             score_lst = json.load(score_file)
         return score_lst
 
     def write_bests(self, score_lst : list):
-        with open("scores.json", "w") as outfile:
+        with open("best_scores.json", "w") as outfile:
             json.dump(score_lst, outfile)

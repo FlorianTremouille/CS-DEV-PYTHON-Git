@@ -4,7 +4,7 @@ Class s'occupant du joueur.
 
 
 from tkinter import Canvas
-from pynput.keyboard import Key, Listener
+from pynput.keyboard import Key, HotKey, Listener
 from time import time
 
 from .Bullet import Bullet
@@ -24,7 +24,7 @@ class Player:
         self.__height = height
         self.__color = color
         self.is_alive = True
-        self.__remaining_lives = 3
+        self.__remaining_lives = 1
         self.__god_mod = False
 
         self.bind_inputs()
@@ -73,7 +73,7 @@ class Player:
     def bind_inputs(self):        
         self.__listener = Listener(on_press=self.on_press_handlers) 
         self.__listener.start() 
-            
+
     def on_press_handlers(self, key):
         if self.is_alive:
             if (key == Key.left):
@@ -85,6 +85,12 @@ class Player:
                 if actual_time - self.last_fire_time >= self.fire_cooldown:
                     self.last_fire_time = actual_time
                     self.fire_bullet()
+            if 'char' in dir(key):
+                print(key.char)
+                if (key.char == 'l'):
+                    self.add_life()
+                if (key.char == 'g'):
+                    self.force_god_mod()
 
     def move_left(self):
         if self.__canvas.coords('player')[0]-25 > 25:
@@ -104,6 +110,18 @@ class Player:
         x = actual_player_coords[0]
         y = actual_player_coords[1]
         Bullet(self.__canvas, bullet_tag, x, y).fire(self.bullet_speed)
+
+    def add_life(self):
+        self.__remaining_lives += 1
+        self.__canvas.itemconfig('life_text', text='Vies restantes : ' + str(self.__remaining_lives))
+
+    def force_god_mod(self):
+        if not self.__god_mod:
+            self.set_god_mod(True)
+            self.__canvas.itemconfig('life_text', text='God Mod')
+        else:
+            self.set_god_mod(False)
+            self.__canvas.itemconfig('life_text', text='Vies restantes : ' + str(self.__remaining_lives))
 
     def check_for_collision(self):
         if self.get_is_alive():
