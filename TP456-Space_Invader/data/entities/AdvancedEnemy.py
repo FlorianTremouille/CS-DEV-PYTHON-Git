@@ -15,8 +15,8 @@ class AdvancedEnemy(BasicEnemy):
     def __init__(self, canvas: Canvas, scale: int = 50, color: str = 'purple'):
         super().__init__(canvas, scale, color)
 
-        self.__min_fire_delay = 1
-        self.__max_fire_delay = 5
+        self.__min_fire_delay = 1           # Temps MINIMUM entre 2 tirs.
+        self.__max_fire_delay = 5           # Temps MAXIMUM entre 2 tirs.
 
         self.define_fire()
 
@@ -33,10 +33,15 @@ class AdvancedEnemy(BasicEnemy):
         return self.__max_fire_delay
 
     def define_fire(self):
+        """Défini de manière pseudo aléatoire le moment où l'alien va tirer."""
         random_timer = int(round(uniform(self.get_min_fire_delay(),self.get_max_fire_delay()),3)*1000)
         self.fire_bullet_after_id = self.get_canvas().after(random_timer, lambda: self.fire_bullet())
 
     def fire_bullet(self):
+        """
+        Réalise le tir de l'alien.
+        Crée l'objet de classe Bullet avec les paramètres adaptés à l'alien.
+        """
         if self.get_is_alive():
             bullet_tag = 'e_bullet'
             actual_enemy_coords = self.get_canvas().coords(self.get_id())

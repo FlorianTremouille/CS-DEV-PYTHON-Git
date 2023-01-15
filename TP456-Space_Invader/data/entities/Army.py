@@ -23,12 +23,14 @@ class Army:
 
     
     def initial_wave_size(self) -> int:
+        """Retourne le nombre d'alien initialisé au début du niveau."""
         wave_size = 0
         for enemy_raw in self.__level:
             wave_size += len(enemy_raw)
         return wave_size
 
     def init_enemies(self):
+        """Crée tous les aliens en fonction du niveau."""
         self.is_army_alive = True
         y_start = 25
         space_between = 20
@@ -79,13 +81,14 @@ class Army:
             y_start += enemy.get_scale() + space_between
         
     def start_enemies_pattern(self, last_enemy_count : int, speed_factor: int, way: int = 1):
+        """Lance le déplacement des aliens."""
         y = 0
         speed = speed_factor*2.5 + 5
         enemies = self.__canvas.find_withtag('enemy')
 
         if len(enemies) > 0 :
             new_enemy_count = len(enemies)
-            speed += ((last_enemy_count - new_enemy_count) / last_enemy_count) * speed * 0.5
+            speed += ((last_enemy_count - new_enemy_count) / last_enemy_count) * speed * 0.5        # Permet d'augmenter la vitesse des aliens lorsqu'un d'entre eux est tué.
             
             max_X_enemy_coord = self.__canvas.coords(enemies[-1])[20]
             min_X_enemy_coord = self.__canvas.coords(enemies[0])[4]

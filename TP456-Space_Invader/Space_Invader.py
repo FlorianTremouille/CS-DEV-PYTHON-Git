@@ -100,7 +100,7 @@ def delete_last_best_score():
         best_score.config(text= best_score_text)
 
 def start_game(): 
-    """Crée la fenêtre de jeu et l'initialise."""
+    """Crée la fenêtre de jeu et initialise la partie."""
     global game, frame_game, bg_game_img, bg_frames_img, canvas
     frame_menu.destroy()
     
