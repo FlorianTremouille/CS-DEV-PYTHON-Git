@@ -33,10 +33,11 @@ class BasicEnemy:
     def set_id(self, id : int) -> bool:
         self.__id = id      
 
-    def check_for_collision(self):        
+    def check_for_collision(self):
+        """Observe si l'ennemi subit une collision."""
         if self.__is_alive:
             c = self.get_canvas().coords(self.get_id())
-            entitites = self.get_canvas().find_overlapping(c[4], c[7], c[20], c[1]) # adapté au polygone     
+            entitites = self.get_canvas().find_overlapping(c[4], c[7], c[20], c[1]) # Coordonnées adaptées au polygone.     
             
             for widget in entitites:
                 for tag in self.get_canvas().gettags(widget):
@@ -45,11 +46,17 @@ class BasicEnemy:
             self.get_canvas().after(30, lambda: self.check_for_collision())
 
     def touch_and_destroy_bullet(self, bullet : int):
+        """
+        Permet d'executer l'action souhaité lorsque l'alien est touché par un objet Bullet et détruit l'objet l'ayant touché.
+        Pour un ennemi classique, il meurt.
+        Pour l'ennemi BOSS, il perd une vie.
+        """
         self.__is_alive = False
         self.__canvas.delete(self.get_id())
         self.__canvas.delete(bullet)
         self.update_score(self.__class__.__name__)
 
-    def update_score(self, enemy_type: str):        
+    def update_score(self, enemy_type: str):
+        """Actualise les scores à la suite de l'élimination d'un ennemi."""    
         score = Score(self.__canvas)
         score.update_score(enemy_type)

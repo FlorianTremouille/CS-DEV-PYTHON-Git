@@ -24,12 +24,12 @@ class BossEnemy(AdvancedEnemy):
 
     def fire_bullet(self):
         if self.get_is_alive():
-            for num_bullet in range(0,3) :
+            for num_bullet in range(0,3) :          # Boucle permettant de crée les multiples tirs simultanés de l'alien BOSS.
                 bullet_tag = 'e_bullet'
                 actual_enemy_coords = self.get_canvas().coords(self.get_id())
                 delta = num_bullet
                 if num_bullet == 2 :
-                    delta = -1  # centrer les tirs
+                    delta = -1
                 x = actual_enemy_coords[0] + delta * 20
                 y = actual_enemy_coords[1] 
                 Bullet(self.get_canvas(), bullet_tag, x, y, 'grey').fire(self.bullet_speed, 1)
@@ -49,6 +49,7 @@ class BossEnemy(AdvancedEnemy):
         self.get_canvas().delete(bullet)
 
     def boss_dead(self):
+        """Permet de définir le BOSS comme étant mort."""
         self.__is_alive = False
         self.get_canvas().delete(self.get_id())
         self.update_score(self.__class__.__name__)

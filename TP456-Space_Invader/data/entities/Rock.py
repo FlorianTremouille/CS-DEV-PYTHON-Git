@@ -18,6 +18,7 @@ class Rock:
         self.__is_alive = value
 
     def check_for_collision(self):
+        """Observe si le rocher subit une collision."""
         if len(self.__canvas.gettags(self.__id)) == 1:
             c = self.__canvas.coords(self.__id)
             entitites = self.__canvas.find_overlapping(c[0], c[1], c[2], c[3])
@@ -35,9 +36,13 @@ class Rock:
                 self.__canvas.after(30, lambda: self.check_for_collision())
 
     def die_and_destroy_widget(self, widget):
+        """
+        Détruit le rocher et l'objet l'ayant touché.
+        """
         self.set_is_alive(False)
         self.__canvas.delete(self.__id)
         self.destroy_contact_widget(widget)
 
     def destroy_contact_widget(self, widget):
+        """Détruit l'objet ayant touché le rocher"""
         self.__canvas.delete(widget)

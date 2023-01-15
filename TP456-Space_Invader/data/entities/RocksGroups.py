@@ -16,7 +16,12 @@ class RocksGroup:
         self.__rock_width = 20
         self.__rocks_groups_number = 6
         self.__rocks_groups_spawn_points = []
-        self.__rock_placement = [
+        # self.__rock_placement_cross = [                       "Permet de placer les rocher en forme de croix"
+        #     (0,-1),
+        #     (-1,0), (0,0), (1,0),
+        #     (0,1)
+        #     ]
+        self.__rock_placement_cube = [
             (-1,-1), (0,-1), (1,-1),
             (-1,0), (0,0), (1,0),
             (-1,1), (0,1), (1,1)
@@ -26,6 +31,7 @@ class RocksGroup:
         self.init__rocks()
 
     def init_rock_spawn_points(self):
+        """Calcul les points de spawn des groupes de rochers en fonction du nombre de groupe et de la largeur du canvas."""
         self.__canvas.update()
         canvas_width = self.__canvas.winfo_width()
         x_spawn_point = canvas_width / (self.__rocks_groups_number + 1)
@@ -33,9 +39,10 @@ class RocksGroup:
             self.__rocks_groups_spawn_points.append(x_spawn_point * i - (self.__rock_width/2) )
 
     def init__rocks(self):
+        """Crée les rochers selon le placement prédéfini."""
         dist = self.__rock_width
         for spawn_point in self.__rocks_groups_spawn_points:
-            for c in self.__rock_placement:
+            for c in self.__rock_placement_cube:
                 x, y = c[0], c[1]
                 p1 = spawn_point + (dist*x)
                 p2 = 500 + (dist*y)

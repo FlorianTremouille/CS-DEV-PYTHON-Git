@@ -58,16 +58,21 @@ class Bullet:
         self.__id = id
 
     def fire(self, speed: float, way: int = -1):
+        """
+        Gère le déplacement de la Bullet en bouclant.
+        La boucle s'arrete lorsque la Bullet n'est plus visible sur la canvas.
+        """
         if self.__bullet_display:
             self.__canvas.move(self.__id, 0, way * 3 * speed)
             self.check_fire_on_screen()
-            self.__interval_id = self.__canvas.after(30, lambda: self.fire(speed, way))
+            self.__canvas.after(30, lambda: self.fire(speed, way))
 
     def check_fire_on_screen(self):
+        """Observe si le widget associé a la bullet est toujours visible sur la canvas."""
         c = self.__canvas.coords(self.__id)
         if len(c)>1 and (c[3] < 0 or c[1] > self.__canvas_height):
             self.kill_bullet()
-        if len(c) == 0:
+        if len(c) == 0:         # La liste des coordonnées est vide si le widget as été supprimé du canvas. (Lorsque la bullet a touché un ennemi par exemple)
             self.kill_bullet()
     
     def kill_bullet(self):

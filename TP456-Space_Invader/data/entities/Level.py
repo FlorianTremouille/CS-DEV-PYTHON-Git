@@ -25,12 +25,21 @@ class Level:
         self.load_level()   
 
     def load_level(self, level_name : str = 'level_1.json'):
+        """
+        Charge le fichier .json associé au niveau souhaité.
+        Puis initialise le groupe d'alien du niveau.
+        """
         self.is_level_finished = False
         with open('data/levels/'+level_name, ) as level_file: 
             level = json.load(level_file)
             self.init_army(level)
 
     def increase_level(self):
+        """
+        Supprime le précédent objet Army.
+        Calcul le fichier level devant etre chargé.
+        Puis lance le chargement du nieau suivant.
+        """
         del self.__current_army
 
         self.level_number += 1
@@ -42,14 +51,21 @@ class Level:
         self.load_level(level)
 
     def init_army(self, level : list):
+        """
+        Calcul la vitesse du groupe d'armée en fonction du niveau.
+        Crée l'objet Army en lui associant la liste d'ennemie et la vitesse correspondant au niveau.
+        Puis lance la boucle is_army_alive()
+        """
         speed_factor = (self.level_number-1)//5
         self.__current_army = Army(self.__canvas, level, speed_factor)
         self.is_army_alive()
 
     def init_rock(self):
+        """Initialise les groupes de roches."""
         RocksGroup(self.__canvas)
 
     def is_army_alive(self):
+        """Boucle permetttant de vérifier si l'armée est toujours en vie."""
         if not self.__current_army.is_army_alive:
             self.is_level_finished = True            
         else:

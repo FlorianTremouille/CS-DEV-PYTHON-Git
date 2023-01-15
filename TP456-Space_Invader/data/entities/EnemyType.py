@@ -1,5 +1,5 @@
 """
-Class permettant l'identification des enemies.
+Class permettant l'identification des enemies grace à des enum.
 Date : 12/12/2022
 Florian Trémouille et Hugo Miaglia
 """
