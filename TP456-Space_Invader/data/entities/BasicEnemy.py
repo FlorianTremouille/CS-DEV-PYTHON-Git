@@ -1,5 +1,7 @@
 """
 Class s'occupant des ennemies basiques.
+Date : 30/12/2022
+Florian Trémouille et Hugo Miaglia
 """
 from tkinter import Canvas
 

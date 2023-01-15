@@ -1,5 +1,7 @@
 """
 Class s'occupant du Boss dans le level 5.
+Date : 10/01/2023
+Florian Trémouille et Hugo Miaglia
 """
 
 from tkinter import Canvas

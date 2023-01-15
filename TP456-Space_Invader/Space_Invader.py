@@ -1,27 +1,14 @@
 """
+Fichier qui s'occupe de lancement du jeu
+Date : 30/12/2022
+Florian Trémouille et Hugo Miaglia
+
 Si erreur : "ModuleNotFoundError: No module named 'pynput'"
+Installer le module pynput.
 Relancer l'installeur Python et s'assurer d'avoir coché "Add python to enironment variables"
 Faire dans la console :
     python -m ensurepip
     pip install pynput
-
-TO DO :
-
-Implémentaton file : Ordonner l'apparition des ennemies par type dans une file puis ensuite les "summon".
-                    file.append(X) puis file.pop(0)
-
-
-Implémenation pile : Faire apparaitre le LAST SCORE et permettre de supprimer le LAST SCORE dans le start menu.
-                    pile.append(x) puis pile.pop()
-                    STOCKAGE DU BEST SCORE
-                    
-
-Partie perdue   :   
-        Arrêt du jeu
-
-
-readme
-
 """
 import os
 import tkinter as Tk

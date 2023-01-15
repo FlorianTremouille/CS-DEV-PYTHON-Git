@@ -1,5 +1,7 @@
 """
 Class s'occupant du chargement des niveaux. Leur chargement et leur difficulté.
+Date : 30/12/2022
+Florian Trémouille et Hugo Miaglia
 """
 
 

@@ -1,6 +1,8 @@
 """
 Class singleton qui s'occupe du compte et de l'actualisation de l'affichage du score.
 Utilisation d'une pile.
+Date : 09/12/2022
+Florian Trémouille et Hugo Miaglia
 """
 
 from tkinter import Canvas
