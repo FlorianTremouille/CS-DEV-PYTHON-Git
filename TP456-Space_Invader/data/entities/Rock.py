@@ -32,8 +32,10 @@ class Rock:
                     if 'enemy' == tag:
                         self.die_and_destroy_widget(widget)
 
-            if (self.__is_alive):    
+            if (self.__is_alive) :    
                 self.__canvas.after(30, lambda: self.check_for_collision())
+
+
 
     def die_and_destroy_widget(self, widget):
         """

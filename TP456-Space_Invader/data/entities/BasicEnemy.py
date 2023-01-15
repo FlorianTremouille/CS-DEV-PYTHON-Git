@@ -35,7 +35,8 @@ class BasicEnemy:
 
     def check_for_collision(self):
         """Observe si l'ennemi subit une collision."""
-        if self.__is_alive:
+        c = self.get_canvas().coords(self.get_id())
+        if self.__is_alive and len(c) !=0 :
             c = self.get_canvas().coords(self.get_id())
             entitites = self.get_canvas().find_overlapping(c[4], c[7], c[20], c[1]) # Coordonnées adaptées au polygone.     
             

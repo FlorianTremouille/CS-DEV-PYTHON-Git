@@ -37,16 +37,16 @@ class AdvancedEnemy(BasicEnemy):
     def define_fire(self):
         """Défini de manière pseudo aléatoire le moment où l'alien va tirer."""
         random_timer = int(round(uniform(self.get_min_fire_delay(),self.get_max_fire_delay()),3)*1000)
-        self.fire_bullet_after_id = self.get_canvas().after(random_timer, lambda: self.fire_bullet())
+        self.get_canvas().after(random_timer, lambda: self.fire_bullet())
 
     def fire_bullet(self):
         """
         Réalise le tir de l'alien.
         Crée l'objet de classe Bullet avec les paramètres adaptés à l'alien.
         """
-        if self.get_is_alive():
+        actual_enemy_coords = self.get_canvas().coords(self.get_id())
+        if self.get_is_alive() and len(actual_enemy_coords) != 0:
             bullet_tag = 'e_bullet'
-            actual_enemy_coords = self.get_canvas().coords(self.get_id())
             x = actual_enemy_coords[0]
             y = actual_enemy_coords[1]
             Bullet(self.get_canvas(), bullet_tag, x, y, 'red').fire(self.bullet_speed, 1)
