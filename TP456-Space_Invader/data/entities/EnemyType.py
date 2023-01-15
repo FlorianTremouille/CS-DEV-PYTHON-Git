@@ -1,5 +1,7 @@
 """
 Class permettant l'identification des enemies.
+Date : 12/12/2022
+Florian Trémouille et Hugo Miaglia
 """
 
 from enum import Enum

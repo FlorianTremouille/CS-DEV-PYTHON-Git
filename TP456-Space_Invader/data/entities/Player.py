@@ -1,5 +1,7 @@
 """
 Class s'occupant du joueur.
+Date : 22/12/2022
+Florian Trémouille et Hugo Miaglia
 """
 
 
@@ -24,7 +26,7 @@ class Player:
         self.__height = height
         self.__color = color
         self.is_alive = True
-        self.__remaining_lives = 1
+        self.__remaining_lives = 3
         self.__god_mod = False
 
         self.bind_inputs()

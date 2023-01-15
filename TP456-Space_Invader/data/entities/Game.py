@@ -1,5 +1,7 @@
 """
 Class s'occupant de la partie en générale. Elle coordonne les autres classes.
+Date : 04/12/2022
+Florian Trémouille et Hugo Miaglia
 """
 
 from tkinter import Canvas, PhotoImage

@@ -1,6 +1,8 @@
 """
 Class s'occupant de la création de rochers.
 Utilisation d'une liste.
+Date : 09/12/2022
+Florian Trémouille et Hugo Miaglia
 """
 
 from tkinter import Canvas
