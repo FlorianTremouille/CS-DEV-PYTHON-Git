@@ -1,3 +1,7 @@
+SPACE INVADER
+FLORIAN TRÉMOUILLE & HUGO MIAGLIA
+
+Adresse répertoire GIT : 'https://github.com/FlorianTremouille/CS-DEV-PYTHON-Git'
 
 Règles spéciales/Mécaniques de jeu choisies : 
 	Après avoir été touché, nous sommes en mode 'invincible' pendant 5 secondes.
@@ -28,13 +32,11 @@ Implémentation de la PILE:
 	Ajout des meilleurs score au fur et à mesure et possibilité de supprimer le dernier meilleur score dans le menu.
 	Voir le fichier 'Score.py'
 
-Commandes:
-Touche 'Flèche Droite' pour aller à droite
-Touche 'Flèche Gauche' pour aller à gauche
-Touche 'Espace' pour tirer
-
 Commandes de triche :
 Touche 'L' pour s'ajouter une vie
 Touche 'G' pour passer en mode invincible (rappuyer pour sortir de ce mode)
 
-Adresse répertoire GIT : 'https://github.com/FlorianTremouille/CS-DEV-PYTHON-Git'
+Commandes:
+Touche 'Flèche Droite' pour aller à droite
+Touche 'Flèche Gauche' pour aller à gauche
+Touche 'Espace' pour tirer
